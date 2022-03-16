@@ -1,7 +1,6 @@
 import 'package:barcloud/UI/screens/pages/home.dart';
 import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_code_dart_scan/qr_code_dart_scan.dart';
 
 import 'resultView.dart';
 
