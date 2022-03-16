@@ -3,7 +3,6 @@ import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:barcloud/repository/qr_repo.dart';
 import 'package:barcloud/repository/scanner_repo.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_code_dart_scan/qr_code_dart_scan.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -35,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Column(
-        children: [qrAPI.getQRImage("hello world this is my PFE", 200.0)],
+        children: [
+          qrAPI.getQRImage("hello world this is my PFE", 200.0)
+        ],
       ),
     );
   }
