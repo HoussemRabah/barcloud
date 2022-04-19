@@ -6,11 +6,13 @@ class AuthRepository {
   TheUser? user;
   String? errorMessage;
 
-  signIn({required String email, required String password}) async {
+  Future<bool> signIn({required String email, required String password}) async {
     try {
       await db.signInWithEmailAndPassword(email: email, password: password);
+      return true;
     } on FirebaseAuthException catch (e) {
       handleError(e.code);
+      return false;
     }
   }
 
