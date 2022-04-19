@@ -81,14 +81,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 2.0),
                       child: TextFieldPassword(),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          "mot de passe oublié?",
-                          style: styleSmall.copyWith(color: colorAccent),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 0.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "mot de passe oublié?",
+                            style: styleSmall.copyWith(color: colorAccent),
+                          )
+                        ],
+                      ),
                     ),
                     Spacer(),
                     Container(
