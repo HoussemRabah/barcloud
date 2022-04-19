@@ -16,10 +16,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required this.context}) : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       if (event is AuthEventInit) {
+        context = event.context;
         authRepository.authListen(signedOut: () {
-          if (context != null) newScreen(context!, LoginScreen());
+          newScreen(context!, LoginScreen());
         }, signedIn: () {
-          if (context != null) newScreen(context!, HomeScreen());
+          newScreen(context!, HomeScreen());
         });
       }
 
