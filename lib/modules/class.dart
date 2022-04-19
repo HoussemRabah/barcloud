@@ -1,21 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 enum Role { agent, ing, admin }
 
-class User {
+class TheUser {
   String id;
   String nom;
   String prenom;
   String sub;
   Role role;
-
+  User? user;
   String getFullName() => "$nom $prenom";
-  User(
+  TheUser(
       {required this.id,
       required this.nom,
       required this.prenom,
       required this.sub,
-      required this.role});
+      required this.role,
+      required this.user});
 }
 
 class Zone {
