@@ -14,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           print("out");
         }, signedIn: () {
           print("in");
+          print(authRepository.user.toString());
         });
       }
 

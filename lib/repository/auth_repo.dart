@@ -1,4 +1,5 @@
 import 'package:barcloud/modules/class.dart';
+import 'package:barcloud/repository/database_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepository {
@@ -17,18 +18,13 @@ class AuthRepository {
   }
 
   authListen({required Function signedOut, required Function signedIn}) {
-    db.authStateChanges().listen((User? user) {
+    db.authStateChanges().listen((User? user) async {
       if (user == null) {
         this.user = null;
         signedOut();
       } else {
-        this.user = TheUser(
-            id: user.uid,
-            nom: "rabah",
-            prenom: "houssem",
-            sub: "a kach 3afsa",
-            role: Role.agent,
-            user: user);
+        Map userData = await DatabaseRepository().getMap("/user/${user.uid}/");
+        this.user = DatabaseRepository().fromMapTheUser(userData, user);
         signedIn();
       }
     });
@@ -42,6 +38,8 @@ class AuthRepository {
         case 'user-not-found':
           errorMessage = "No user found for that email";
           break;
+        default:
+          errorMessage = code;
       }
   }
 }

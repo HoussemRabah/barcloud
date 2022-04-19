@@ -116,6 +116,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             Spacer(),
+                            if (state is AuthStateError)
+                              Text(
+                                state.errorMessage,
+                                style: styleSimple.copyWith(color: colorRed),
+                              ),
                             GestureDetector(
                               onTap: () {
                                 authBloc.add(AuthEventSignIn(
