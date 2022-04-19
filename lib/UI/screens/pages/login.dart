@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Column(
           children: [
             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -39,41 +40,48 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        width: 300.0,
+                        width: 200.0,
                         child: Text(
                           "Facilitez le travail d'inventaire",
                           style: styleSimplePlus.copyWith(color: colorAccent),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(
-                        height: 64.0,
-                      ),
-                      Image.asset("assets/boxes.png",
-                          width: MediaQuery.of(context).size.width * 0.75,
-                          fit: BoxFit.scaleDown),
                     ],
                   ),
+                  Positioned(
+                      left: 75.0,
+                      top: 120.0,
+                      child: Image.asset(
+                        "assets/boxes.png",
+                        fit: BoxFit.scaleDown,
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: 300,
+                      )),
                 ],
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width,
-              decoration:
-                  BoxDecoration(borderRadius: radiusHalf, color: colorMain),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 8.0),
-                    child: TextFieldInput(hint: "email"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 8.0),
-                    child: TextFieldInput(hint: "password"),
-                  ),
-                  Expanded(
-                    child: Container(
+              color: colorAccent,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.5,
+                decoration:
+                    BoxDecoration(borderRadius: radiusHalf, color: colorMain),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 8.0),
+                      child: TextFieldInput(hint: "email"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 8.0),
+                      child: TextFieldInput(hint: "password"),
+                    ),
+                    Spacer(),
+                    Container(
                       padding: EdgeInsets.all(32.0),
                       decoration: BoxDecoration(
                           borderRadius: radiusHalf, color: colorPrime),
@@ -81,11 +89,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Center(
                           child: Text(
                         "Se connecter",
-                        style: styleSimplePlus.copyWith(color: colorFront),
+                        style: styleSimplePlus.copyWith(color: colorMain),
                       )),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             )
           ],
