@@ -34,9 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Column(
-        children: [
-          qrAPI.getQRImage("hello world this is my PFE", 200.0)
-        ],
+        children: [qrAPI.getQRImage("hello world this is my PFE", 200.0)],
       ),
     );
   }

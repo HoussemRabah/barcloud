@@ -25,6 +25,10 @@ dependencies:
   firebase_storage: ^10.2.12
   firebase_auth: ^3.3.14
   firebase_analytics: ^9.1.5
+  flutter_bloc: ^8.0.1
+  flutter_svg: ^1.0.3
+  google_fonts: ^2.3.1
+  line_icons: ^2.0.1
 
 dev_dependencies:
   flutter_test:
