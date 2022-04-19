@@ -19,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.6,
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
@@ -40,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        width: 100.0,
+                        width: 300.0,
                         child: Text(
                           "Facilitez le travail d'inventaire",
                           style: styleSimplePlus.copyWith(color: colorAccent),
@@ -59,9 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.4,
               decoration:
-                  BoxDecoration(borderRadius: radiusHalf, color: colorFront),
+                  BoxDecoration(borderRadius: radiusHalf, color: colorMain),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

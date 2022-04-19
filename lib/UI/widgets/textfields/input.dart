@@ -16,7 +16,8 @@ class _TextFieldInputState extends State<TextFieldInput> {
       padding: EdgeInsets.all(2.0),
       decoration: BoxDecoration(borderRadius: radius, color: colorAccent),
       child: Container(
-        decoration: BoxDecoration(borderRadius: radius, color: colorFront),
+        padding: EdgeInsets.all(6.0),
+        decoration: BoxDecoration(borderRadius: radius, color: colorMain),
         child: TextField(
           decoration: InputDecoration(
               border: InputBorder.none,
