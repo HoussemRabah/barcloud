@@ -4,7 +4,9 @@ import 'package:line_icons/line_icons.dart';
 import '../../../core/constants.dart';
 
 class TextFieldPassword extends StatefulWidget {
-  const TextFieldPassword({Key? key}) : super(key: key);
+  final TextEditingController textEditingController;
+  const TextFieldPassword({Key? key, required this.textEditingController})
+      : super(key: key);
 
   @override
   State<TextFieldPassword> createState() => _TextFieldPasswordState();
@@ -22,6 +24,7 @@ class _TextFieldPasswordState extends State<TextFieldPassword> {
         padding: EdgeInsets.all(6.0),
         decoration: BoxDecoration(borderRadius: radius, color: colorMain),
         child: TextField(
+          controller: widget.textEditingController,
           obscureText: _dontSeePassword,
           decoration: InputDecoration(
               suffixIcon: GestureDetector(

@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 class TextFieldInput extends StatefulWidget {
   final String hint;
-  const TextFieldInput({Key? key, required this.hint}) : super(key: key);
+  final TextEditingController textEditingController;
+  const TextFieldInput(
+      {Key? key, required this.hint, required this.textEditingController})
+      : super(key: key);
 
   @override
   State<TextFieldInput> createState() => _TextFieldInputState();
@@ -19,6 +22,7 @@ class _TextFieldInputState extends State<TextFieldInput> {
         padding: EdgeInsets.all(6.0),
         decoration: BoxDecoration(borderRadius: radius, color: colorMain),
         child: TextField(
+          controller: widget.textEditingController,
           decoration: InputDecoration(
               border: InputBorder.none,
               hintText: widget.hint,

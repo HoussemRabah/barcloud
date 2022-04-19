@@ -7,6 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 AuthBloc authBloc = AuthBloc();
+TextEditingController username = TextEditingController();
+TextEditingController password = TextEditingController();
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthBloc>(
-      create: (context) => authBloc,
+      create: (context) => authBloc..add(AuthEventInit()),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: colorBack,
@@ -75,46 +77,68 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: MediaQuery.of(context).size.height * 0.5,
                   decoration:
                       BoxDecoration(borderRadius: radiusHalf, color: colorMain),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 8.0),
-                        child: TextFieldInput(hint: "email"),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 2.0),
-                        child: TextFieldPassword(),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 0.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                  child: BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      if (state is AuthStateLoading)
+                        return Center(child: CircularProgressIndicator());
+                      else
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "mot de passe oublié?",
-                              style: styleSmall.copyWith(color: colorAccent),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  32.0, 32.0, 32.0, 8.0),
+                              child: TextFieldInput(
+                                hint: "email",
+                                textEditingController: username,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  32.0, 0.0, 32.0, 2.0),
+                              child: TextFieldPassword(
+                                textEditingController: password,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  32.0, 0.0, 32.0, 0.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "mot de passe oublié?",
+                                    style:
+                                        styleSmall.copyWith(color: colorAccent),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                authBloc.add(AuthEventSignIn(
+                                    email: username.text,
+                                    password: password.text));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(32.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: radiusHalf,
+                                    color: colorPrime),
+                                width: MediaQuery.of(context).size.width,
+                                child: Center(
+                                    child: Text(
+                                  "Se connecter",
+                                  style: styleSimplePlus.copyWith(
+                                      color: colorMain),
+                                )),
+                              ),
                             )
                           ],
-                        ),
-                      ),
-                      Spacer(),
-                      Container(
-                        padding: EdgeInsets.all(32.0),
-                        decoration: BoxDecoration(
-                            borderRadius: radiusHalf, color: colorPrime),
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                            child: Text(
-                          "Se connecter",
-                          style: styleSimplePlus.copyWith(color: colorMain),
-                        )),
-                      )
-                    ],
+                        );
+                    },
                   ),
                 ),
               )
