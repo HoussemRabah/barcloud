@@ -1,4 +1,5 @@
 import 'package:barcloud/UI/widgets/textfields/input.dart';
+import 'package:barcloud/UI/widgets/textfields/password.dart';
 import 'package:barcloud/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -77,8 +78,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: TextFieldInput(hint: "email"),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 8.0),
-                      child: TextFieldInput(hint: "password"),
+                      padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 2.0),
+                      child: TextFieldPassword(),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "mot de passe oublié?",
+                          style: styleSmall.copyWith(color: colorAccent),
+                        )
+                      ],
                     ),
                     Spacer(),
                     Container(
