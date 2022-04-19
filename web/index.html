@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
+<html><head>
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
@@ -12,12 +10,39 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
 
   <title>flutter_web_app</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+  <script>
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+      console.info("Initializing firebase...")
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyANb0se6LXIKnUqz3ePvvr5cJp5YdTGYA0",
+        authDomain: "barcloud-pfe.firebaseapp.com",
+        projectId: "barcloud-pfe",
+        storageBucket: "barcloud-pfe.appspot.com",
+        messagingSenderId: "899028794837",
+        appId: "1:899028794837:web:63747ba622cf2f84e7515c",
+      };
+  
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+  		firebase.analytics();
+      console.info("App is initialized", app)
+    </script>
+  
+  
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -29,5 +54,6 @@
     }
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
-</body>
-</html>
+
+
+</body></html>

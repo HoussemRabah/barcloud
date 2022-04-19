@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "899028794837",
+    "project_id": "barcloud-pfe",
+    "storage_bucket": "barcloud-pfe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899028794837:android:d04cfe1d4a836cffe7515c",
+        "android_client_info": {
+          "package_name": "com.mbh.barcloud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899028794837-g8tattgrheab8nlmu8q8g9p8km374f8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSQCBX2p_88NlzQ7fDR7qMw689oVSWAb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899028794837-g8tattgrheab8nlmu8q8g9p8km374f8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
