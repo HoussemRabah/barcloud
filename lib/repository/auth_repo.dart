@@ -30,13 +30,14 @@ class AuthRepository {
     });
   }
 
+  // todo : add explanation to errors , search about "firebase auth erros code" on google
   handleError(String? code) {
     if (code == null)
       errorMessage = null;
     else
       switch (code) {
         case 'user-not-found':
-          errorMessage = "No user found for that email";
+          errorMessage = "l'email n'appartient a aucun utilisateur";
           break;
         default:
           errorMessage = code;
