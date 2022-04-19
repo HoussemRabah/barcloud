@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-AuthBloc authBloc = AuthBloc();
+AuthBloc authBloc = AuthBloc(context: null);
 TextEditingController username = TextEditingController();
 TextEditingController password = TextEditingController();
 
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthBloc>(
-      create: (context) => authBloc..add(AuthEventInit()),
+      create: (context) => authBloc..add(AuthEventInit(context: context)),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: colorBack,

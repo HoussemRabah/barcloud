@@ -1,20 +1,25 @@
+import 'package:barcloud/UI/screens/pages/home.dart';
+import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:barcloud/repository/auth_repo.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
+
+import '../../../UI/screens/pages/login.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  BuildContext? context;
   AuthRepository authRepository = AuthRepository();
-  AuthBloc() : super(AuthInitial()) {
+  AuthBloc({required this.context}) : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       if (event is AuthEventInit) {
         authRepository.authListen(signedOut: () {
-          print("out");
+          if (context != null) newScreen(context!, LoginScreen());
         }, signedIn: () {
-          print("in");
-          print(authRepository.user.toString());
+          if (context != null) newScreen(context!, HomeScreen());
         });
       }
 
