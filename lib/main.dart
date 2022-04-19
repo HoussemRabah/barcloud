@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'UI/screens/pages/home.dart';
+import 'UI/screens/pages/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }

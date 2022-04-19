@@ -10,3 +10,7 @@ TextStyle styleSimplePlus =
     TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500);
 TextStyle styleSimple = TextStyle(fontSize: 17.0);
 TextStyle styleSmall = TextStyle(fontSize: 14.0);
+
+BorderRadius radius = BorderRadius.all(Radius.circular(30));
+BorderRadius radiusHalf = BorderRadius.only(
+    topLeft: Radius.circular(30), topRight: Radius.circular(30));
