@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'UI/screens/pages/home.dart';
 import 'UI/screens/pages/login.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'barcloud',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
       home: LoginScreen(),
     );
