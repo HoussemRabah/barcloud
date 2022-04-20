@@ -25,28 +25,31 @@ class _HeaderUserState extends State<HeaderUser> {
         ),
         padding: EdgeInsets.all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Spacer(),
-            Row(children: [
-              ImageCircle(img: widget.user.getImage()),
-              SizedBox(
-                width: 8.0,
-              ),
-              Column(
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "Bonjour ${widget.user.getFullName()}",
-                    style: styleSimplePlus.copyWith(color: colorMain),
+                  ImageCircle(img: widget.user.getImage()),
+                  SizedBox(
+                    width: 8.0,
                   ),
-                  Text(
-                    widget.user.sub,
-                    style: styleSmall.copyWith(color: colorMain),
-                  ),
-                ],
-              )
-            ]),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Bonjour ${widget.user.getFullName()}",
+                        style: styleSimplePlus.copyWith(color: colorMain),
+                      ),
+                      Text(
+                        widget.user.sub,
+                        style: styleSmall.copyWith(color: colorMain),
+                      ),
+                    ],
+                  )
+                ]),
           ],
         ));
   }
