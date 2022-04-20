@@ -37,7 +37,7 @@ class _HeaderUserState extends State<HeaderUser> {
               Column(
                 children: [
                   Text(
-                    widget.user.getFullName(),
+                    "Bonjour ${widget.user.getFullName()}",
                     style: styleSimplePlus.copyWith(color: colorMain),
                   ),
                   Text(
