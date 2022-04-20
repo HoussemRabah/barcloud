@@ -16,3 +16,5 @@ TextStyle styleSmall = TextStyle(fontSize: 14.0);
 BorderRadius radius = BorderRadius.all(Radius.circular(30));
 BorderRadius radiusHalf = BorderRadius.only(
     topLeft: Radius.circular(30), topRight: Radius.circular(30));
+BorderRadius radiusHalfRev = BorderRadius.only(
+    bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30));
