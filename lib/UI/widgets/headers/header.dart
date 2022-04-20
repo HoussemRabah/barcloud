@@ -22,25 +22,39 @@ class _HeaderUserState extends State<HeaderUser> {
           borderRadius: radiusHalfRev,
           color: colorPrime,
         ),
-        alignment: Alignment.bottomCenter,
         padding: EdgeInsets.all(8.0),
-        child: Row(children: [
-          CircleAvatar(),
-          SizedBox(
-            width: 8.0,
-          ),
-          Column(
-            children: [
-              Text(
-                widget.user.getFullName(),
-                style: styleSimplePlus.copyWith(color: colorMain),
+        child: Column(
+          children: [
+            Spacer(),
+            Row(children: [
+              Container(
+                width: 60.0,
+                height: 60.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(360))),
+                child: Image.network(
+                  widget.user.img,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      CircularProgressIndicator(),
+                ),
               ),
-              Text(
-                widget.user.sub,
-                style: styleSmall.copyWith(color: colorMain),
+              SizedBox(
+                width: 8.0,
               ),
-            ],
-          )
-        ]));
+              Column(
+                children: [
+                  Text(
+                    widget.user.getFullName(),
+                    style: styleSimplePlus.copyWith(color: colorMain),
+                  ),
+                  Text(
+                    widget.user.sub,
+                    style: styleSmall.copyWith(color: colorMain),
+                  ),
+                ],
+              )
+            ]),
+          ],
+        ));
   }
 }
