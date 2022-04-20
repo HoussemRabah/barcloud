@@ -1,8 +1,13 @@
 import 'package:barcloud/repository/storage_repo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 enum Role { agent, ing, admin }
+
+enum TaskType { checklist, edit, add }
+
+enum TaskProcess { wait, begin, error, end }
 
 class TheUser {
   String id;
@@ -47,4 +52,24 @@ class Item {
   String id;
   ItemType type;
   Item({required this.id, required this.type});
+}
+
+class Task {
+  String id;
+  TheUser dower;
+  Zone zone;
+  TaskType type;
+  String title;
+  String disc;
+  Timestamp deadline;
+  TaskProcess process;
+  Task(
+      {required this.id,
+      required this.dower,
+      required this.zone,
+      required this.type,
+      required this.title,
+      required this.disc,
+      required this.deadline,
+      required this.process});
 }
