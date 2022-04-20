@@ -1,14 +1,14 @@
 import 'package:barcloud/core/constants.dart';
 import 'package:flutter/material.dart';
 
-class HomeAgent extends StatefulWidget {
-  const HomeAgent({Key? key}) : super(key: key);
+class HomeAdmin extends StatefulWidget {
+  const HomeAdmin({Key? key}) : super(key: key);
 
   @override
-  State<HomeAgent> createState() => _HomeAgentState();
+  State<HomeAdmin> createState() => _HomeAdminState();
 }
 
-class _HomeAgentState extends State<HomeAgent> {
+class _HomeAdminState extends State<HomeAdmin> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

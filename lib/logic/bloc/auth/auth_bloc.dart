@@ -5,6 +5,9 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
+import '../../../UI/screens/pages/homeAdmin.dart';
+import '../../../UI/screens/pages/homeAgent.dart';
+import '../../../UI/screens/pages/homeIng.dart';
 import '../../../UI/screens/pages/login.dart';
 
 part 'auth_event.dart';
@@ -20,7 +23,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         authRepository.authListen(signedOut: () {
           newScreen(context!, LoginScreen());
         }, signedIn: () {
-          newScreen(context!, HomeScreen());
+          switch (authRepository.user!.role.name) {
+            case "agent":
+              newScreen(context!, HomeAgent());
+              break;
+
+            case "ing":
+              newScreen(context!, HomeIng());
+              break;
+
+            case "admin":
+              newScreen(context!, HomeAdmin());
+              break;
+          }
         });
       }
 
