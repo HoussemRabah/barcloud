@@ -1,3 +1,4 @@
+import 'package:barcloud/UI/widgets/images/imagecircle.dart';
 import 'package:barcloud/core/constants.dart';
 import 'package:barcloud/modules/class.dart';
 import 'package:flutter/material.dart';
@@ -24,27 +25,12 @@ class _HeaderUserState extends State<HeaderUser> {
         ),
         padding: EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Spacer(),
             Row(children: [
-              Container(
-                  width: 60.0,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(360))),
-                  child: FutureBuilder(
-                    future: widget.user.getImage(),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<String> snapshot) {
-                      if (snapshot.hasData) if (snapshot.data != null)
-                        return Image.network(
-                          snapshot.data!,
-                          loadingBuilder: (context, child, loadingProgress) =>
-                              CircularProgressIndicator(),
-                        );
-                      return CircularProgressIndicator();
-                    },
-                  )),
+              ImageCircle(img: widget.user.getImage()),
               SizedBox(
                 width: 8.0,
               ),
