@@ -7,6 +7,7 @@ class TheUser {
   String id;
   String nom;
   String prenom;
+  String img;
   String sub;
   Role role;
   User? user;
@@ -17,7 +18,8 @@ class TheUser {
       required this.prenom,
       required this.sub,
       required this.role,
-      required this.user});
+      required this.user,
+      required this.img});
 }
 
 class Zone {

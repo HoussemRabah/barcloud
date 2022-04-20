@@ -14,6 +14,7 @@ class DatabaseRepository {
         id: map["id"],
         nom: map["nom"],
         prenom: map["prenom"],
+        img: map["img"],
         sub: map["sub"],
         role: (map["role"] == "agent")
             ? Role.agent
