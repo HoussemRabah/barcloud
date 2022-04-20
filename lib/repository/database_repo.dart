@@ -9,7 +9,15 @@ class DatabaseRepository {
     return doc.data() as Map;
   }
 
-  TheUser fromMapTheUser(Map map, User user) {
+  Future<TheUser> getUser(String id) async {
+    return fromMapTheUser(await getMap("/user/$id/"), null);
+  }
+
+  Future<Zone> getZone(String id) async {
+    return fromMapZone(await getMap("/zone/$id/"));
+  }
+
+  TheUser fromMapTheUser(Map map, User? user) {
     return TheUser(
         id: map["id"],
         nom: map["nom"],
@@ -22,5 +30,21 @@ class DatabaseRepository {
                 ? Role.admin
                 : Role.ing,
         user: user);
+  }
+
+  Zone fromMapZone(Map map) {
+    return Zone(id: map["id"], name: map["nom"]);
+  }
+
+  Task fromMapTask(Map map) {
+    return Task(
+        id: map["id"],
+        dower: map["dower"],
+        zone: map["zone"],
+        type: getTaskType(map["type"]),
+        title: map["title"],
+        disc: map["disc"],
+        deadline: (map["deadline"] as Timestamp),
+        process: getTaskProcess(map["process"]));
   }
 }

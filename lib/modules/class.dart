@@ -1,3 +1,4 @@
+import 'package:barcloud/repository/database_repo.dart';
 import 'package:barcloud/repository/storage_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +8,38 @@ enum Role { agent, ing, admin }
 
 enum TaskType { checklist, edit, add }
 
+TaskType getTaskType(String type) {
+  switch (type) {
+    case "checklist":
+      return TaskType.checklist;
+
+    case "edit":
+      return TaskType.edit;
+
+    case "add":
+      return TaskType.add;
+  }
+  return TaskType.checklist;
+}
+
 enum TaskProcess { wait, begin, error, end }
+
+TaskProcess getTaskProcess(String process) {
+  switch (process) {
+    case "wait":
+      return TaskProcess.wait;
+
+    case "begin":
+      return TaskProcess.begin;
+
+    case "error":
+      return TaskProcess.error;
+
+    case "end":
+      return TaskProcess.end;
+  }
+  return TaskProcess.wait;
+}
 
 class TheUser {
   String id;
@@ -25,7 +57,7 @@ class TheUser {
       required this.prenom,
       required this.sub,
       required this.role,
-      required this.user,
+      this.user,
       required this.img});
 }
 
@@ -56,13 +88,15 @@ class Item {
 
 class Task {
   String id;
-  TheUser dower;
-  Zone zone;
+  String dower;
+  String zone;
   TaskType type;
   String title;
   String disc;
   Timestamp deadline;
   TaskProcess process;
+  Future<TheUser> getDower() => DatabaseRepository().getUser(dower);
+  Future<Zone> getZone() => DatabaseRepository().getZone(zone);
   Task(
       {required this.id,
       required this.dower,

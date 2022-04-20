@@ -1,4 +1,5 @@
 import 'package:barcloud/UI/screens/pages/login.dart';
+import 'package:barcloud/UI/widgets/cards/task.dart';
 import 'package:barcloud/UI/widgets/headers/header.dart';
 import 'package:barcloud/core/constants.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,20 @@ class _HomeAgentState extends State<HomeAgent> {
               },
             ),
             // tasks
+            SizedBox(
+              height: 8.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "vos taches",
+                style: styleSimplePlus.copyWith(color: colorAccent),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TaskCard(task: null),
+            ),
 
             // options
           ])),
