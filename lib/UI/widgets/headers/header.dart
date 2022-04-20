@@ -33,7 +33,7 @@ class _HeaderUserState extends State<HeaderUser> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(360))),
                 child: Image.network(
-                  widget.user.img,
+                  widget.user.getImage(),
                   loadingBuilder: (context, child, loadingProgress) =>
                       CircularProgressIndicator(),
                 ),

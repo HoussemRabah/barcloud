@@ -1,3 +1,4 @@
+import 'package:barcloud/repository/storage_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
@@ -12,6 +13,7 @@ class TheUser {
   Role role;
   User? user;
   String getFullName() => "$nom $prenom";
+  String getImage() => StorageRepository().getURL(img);
   TheUser(
       {required this.id,
       required this.nom,
