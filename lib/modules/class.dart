@@ -13,7 +13,7 @@ class TheUser {
   Role role;
   User? user;
   String getFullName() => "$nom $prenom";
-  String getImage() => StorageRepository().getURL(img);
+  Future<String> getImage() async => await StorageRepository().getURL(img);
   TheUser(
       {required this.id,
       required this.nom,

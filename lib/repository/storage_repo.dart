@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 class StorageRepository {
   FirebaseStorage storage = FirebaseStorage.instance;
 
-  getURL(String path) {
-    storage.refFromURL(path).getDownloadURL();
+  Future<String> getURL(String path) async {
+    return await storage.refFromURL(path).getDownloadURL();
   }
 }

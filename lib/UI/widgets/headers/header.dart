@@ -28,16 +28,23 @@ class _HeaderUserState extends State<HeaderUser> {
             Spacer(),
             Row(children: [
               Container(
-                width: 60.0,
-                height: 60.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(360))),
-                child: Image.network(
-                  widget.user.getImage(),
-                  loadingBuilder: (context, child, loadingProgress) =>
-                      CircularProgressIndicator(),
-                ),
-              ),
+                  width: 60.0,
+                  height: 60.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(360))),
+                  child: FutureBuilder(
+                    future: widget.user.getImage(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasData) if (snapshot.data != null)
+                        return Image.network(
+                          snapshot.data!,
+                          loadingBuilder: (context, child, loadingProgress) =>
+                              CircularProgressIndicator(),
+                        );
+                      return CircularProgressIndicator();
+                    },
+                  )),
               SizedBox(
                 width: 8.0,
               ),
