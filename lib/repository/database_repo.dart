@@ -33,6 +33,15 @@ class DatabaseRepository {
     return tasks;
   }
 
+  onTaskChange(String id, Function todo) async {
+    FirebaseFirestore.instance
+        .collection("task/$id/tasks/")
+        .snapshots()
+        .listen((event) {
+      todo();
+    });
+  }
+
   TheUser fromMapTheUser(Map map, User? user) {
     return TheUser(
         id: map["id"],
