@@ -26,10 +26,7 @@ class _TaskCardState extends State<TaskCard> {
         children: [
           Container(
               width: 60.0,
-              clipBehavior: Clip.hardEdge,
               height: 60.0,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(360))),
               child: getImageByType(widget.task.type)),
           Column(
             children: [
@@ -39,7 +36,7 @@ class _TaskCardState extends State<TaskCard> {
                     8.0 * 2 -
                     60.0 -
                     40.0 -
-                    8.0,
+                    32.0,
                 child: Text(
                   widget.task.title,
                   style: styleSimple,
@@ -51,7 +48,7 @@ class _TaskCardState extends State<TaskCard> {
                     8.0 * 2 -
                     60.0 -
                     40.0 -
-                    8.0,
+                    32.0,
                 child: Text(
                   "deadline : ${widget.task.deadline.toDate().toString()}",
                   style: styleSmall.copyWith(color: colorAccent),
@@ -59,12 +56,7 @@ class _TaskCardState extends State<TaskCard> {
               ),
             ],
           ),
-          Image.asset(
-            "checklist.png",
-            fit: BoxFit.scaleDown,
-            width: 30,
-            height: 30,
-          ),
+          getImageByProcess(widget.task.process)
         ],
       ),
     );
