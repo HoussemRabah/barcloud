@@ -6,7 +6,7 @@ import 'UI/screens/pages/login.dart';
 import 'package:flutter/scheduler.dart';
 
 void main() async {
-  SchedulerBinding.instance.initInstances();
+  SchedulerBinding.instance!.initInstances();
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
