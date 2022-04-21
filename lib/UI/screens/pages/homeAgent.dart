@@ -63,7 +63,8 @@ class _HomeAgentState extends State<HomeAgent> {
                             return TaskCard(task: taskBloc.tasks![index]);
                           },
                           itemCount: taskBloc.tasks!.length,
-                          physics: null,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
                         ),
                       ),
                     ],

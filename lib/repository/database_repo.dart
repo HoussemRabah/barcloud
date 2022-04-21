@@ -22,18 +22,15 @@ class DatabaseRepository {
   }
 
   Future<List<Task>?> getTasks(String id) async {
-    List<Task> tasks = [];
-    await FirebaseFirestore.instance
-        .collection("task/$id/tasks/")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        tasks.add(fromMapTask(doc.data() as Map<String, dynamic>));
-      });
-    }).whenComplete(() {
-      return tasks;
+    List<Task>? tasks = [];
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection("task/$id/tasks/").get();
+
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    allData.forEach((map) {
+      if (tasks != null) tasks.add(fromMapTask(map as Map<String, dynamic>));
     });
-    return null;
+    return tasks;
   }
 
   TheUser fromMapTheUser(Map map, User? user) {

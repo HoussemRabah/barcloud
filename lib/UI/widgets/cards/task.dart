@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../../core/constants.dart';
 import '../../../modules/class.dart';
@@ -15,7 +17,10 @@ class _TaskCardState extends State<TaskCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: radius, color: colorMain),
+      decoration: BoxDecoration(
+          borderRadius: radius,
+          color: colorMain,
+          boxShadow: [BoxShadow(color: colorAccent)]),
       padding: EdgeInsets.all(8.0),
       child: Row(
         children: [
@@ -25,10 +30,7 @@ class _TaskCardState extends State<TaskCard> {
               height: 60.0,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(360))),
-              child: Image.asset(
-                "checklist.png",
-                fit: BoxFit.scaleDown,
-              )),
+              child: getImageByType(widget.task.type)),
           Column(
             children: [
               SizedBox(
@@ -51,7 +53,7 @@ class _TaskCardState extends State<TaskCard> {
                     40.0 -
                     8.0,
                 child: Text(
-                  "deadline : ${widget.task.deadline}",
+                  "deadline : ${widget.task.deadline.toDate().toString()}",
                   style: styleSmall.copyWith(color: colorAccent),
                 ),
               ),
@@ -66,5 +68,43 @@ class _TaskCardState extends State<TaskCard> {
         ],
       ),
     );
+  }
+}
+
+Widget getImageByType(TaskType type) {
+  switch (type) {
+    case TaskType.checklist:
+      return Image.asset(
+        "checklist.png",
+        fit: BoxFit.scaleDown,
+      );
+
+    case TaskType.add:
+      return SvgPicture.asset(
+        "additem.svg",
+        fit: BoxFit.scaleDown,
+      );
+
+    case TaskType.edit:
+      return Icon(
+        LineIcons.edit,
+        color: colorPrime,
+      );
+  }
+}
+
+Widget getImageByProcess(TaskProcess type) {
+  switch (type) {
+    case TaskProcess.wait:
+      return Text("waiting");
+
+    case TaskProcess.begin:
+      return Text("waiting");
+
+    case TaskProcess.end:
+      return Text("waiting");
+
+    case TaskProcess.error:
+      return Text("waiting");
   }
 }
