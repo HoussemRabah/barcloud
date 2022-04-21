@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../repository/database_repo.dart';
+
 AuthBloc authBloc = AuthBloc(context: null);
+DatabaseRepository databaseRepository = DatabaseRepository();
+
 TextEditingController username = TextEditingController();
 TextEditingController password = TextEditingController();
 
