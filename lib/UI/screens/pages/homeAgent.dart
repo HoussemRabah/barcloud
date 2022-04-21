@@ -47,7 +47,7 @@ class _HomeAgentState extends State<HomeAgent> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TaskCard(task: null),
+              child: Text(""),
             ),
 
             // options
