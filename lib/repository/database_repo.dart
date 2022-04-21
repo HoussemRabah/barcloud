@@ -17,6 +17,25 @@ class DatabaseRepository {
     return fromMapZone(await getMap("/zone/$id/"));
   }
 
+  Future<Task> getTask(String taskId, String id) async {
+    return fromMapTask(await getMap("/task/$id/tasks/$taskId"));
+  }
+
+  Future<List<Task>?> getTasks(String id) async {
+    List<Task> tasks = [];
+    await FirebaseFirestore.instance
+        .collection("task/$id/tasks/")
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        tasks.add(fromMapTask(doc.data() as Map<String, dynamic>));
+      });
+    }).whenComplete(() {
+      return tasks;
+    });
+    return null;
+  }
+
   TheUser fromMapTheUser(Map map, User? user) {
     return TheUser(
         id: map["id"],
