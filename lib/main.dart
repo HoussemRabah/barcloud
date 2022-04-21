@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'UI/screens/pages/home.dart';
 import 'UI/screens/pages/login.dart';
-import 'package:flutter/scheduler.dart';
 
 void main() async {
-  SchedulerBinding.instance!.initInstances();
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
