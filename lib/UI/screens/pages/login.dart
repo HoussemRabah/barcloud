@@ -26,8 +26,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthBloc>(
-      create: (context) => authBloc..add(AuthEventInit(context: context)),
+    return BlocProvider<AuthBloc>.value(
+      value: authBloc..add(AuthEventInit(context: context)),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: colorBack,

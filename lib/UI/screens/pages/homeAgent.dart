@@ -18,11 +18,17 @@ class HomeAgent extends StatefulWidget {
 
 class _HomeAgentState extends State<HomeAgent> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(
-          create: (context) => authBloc,
+        BlocProvider<AuthBloc>.value(
+          value: authBloc,
         ),
         BlocProvider<TaskBloc>(
           create: (context) => taskBloc..add(TaskEventInit()),
