@@ -25,7 +25,7 @@ class _HomeAgentState extends State<HomeAgent> {
           create: (context) => authBloc,
         ),
         BlocProvider<TaskBloc>(
-          create: (context) => taskBloc..add(TaskEventFetch()),
+          create: (context) => taskBloc..add(TaskEventInit()),
         ),
       ],
       child: SafeArea(
