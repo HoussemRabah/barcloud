@@ -1,3 +1,5 @@
+import 'package:barcloud/UI/screens/pages/login.dart';
+import 'package:barcloud/logic/bloc/auth/auth_bloc.dart';
 import 'package:barcloud/modules/class.dart';
 import 'package:barcloud/repository/database_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +27,12 @@ class AuthRepository {
       } else {
         Map userData = await DatabaseRepository().getMap("/user/${user.uid}/");
         this.user = DatabaseRepository().fromMapTheUser(userData, user);
+        DatabaseRepository().onUserChange(user.uid, () async {
+          Map userData =
+              await DatabaseRepository().getMap("/user/${user.uid}/");
+          this.user = DatabaseRepository().fromMapTheUser(userData, user);
+          authBloc.add(AuthEventRefresh());
+        });
         signedIn();
       }
     });

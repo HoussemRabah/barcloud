@@ -42,6 +42,12 @@ class DatabaseRepository {
     });
   }
 
+  onUserChange(String id, Function todo) async {
+    FirebaseFirestore.instance.doc("/user/$id/").snapshots().listen((event) {
+      todo();
+    });
+  }
+
   TheUser fromMapTheUser(Map map, User? user) {
     return TheUser(
         id: map["id"],

@@ -8,6 +8,10 @@ class AuthEventInit extends AuthEvent {
   AuthEventInit({required this.context}) : super();
 }
 
+class AuthEventRefresh extends AuthEvent {
+  AuthEventRefresh() : super();
+}
+
 class AuthEventSignIn extends AuthEvent {
   final String email;
   final String password;

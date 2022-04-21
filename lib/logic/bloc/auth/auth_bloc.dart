@@ -38,6 +38,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }
         });
       }
+      if (event is AuthEventRefresh) {
+        emit(AuthStateLoading());
+        if (authRepository.user != null) emit(AuthStateDone());
+      }
 
       if (event is AuthEventSignIn) {
         emit(AuthStateLoading());
