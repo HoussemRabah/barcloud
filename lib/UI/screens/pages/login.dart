@@ -81,42 +81,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.5,
-                  decoration:
-                      BoxDecoration(borderRadius: radiusHalf, color: colorMain),
+                  decoration: BoxDecoration(borderRadius: radiusHalf, color: colorMain),
                   child: BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       if (state is AuthStateLoading)
-                        return Center(child: CircularProgressIndicator());
+                        return Center(child: Text("loading"));
                       else
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  32.0, 32.0, 32.0, 8.0),
+                              padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 8.0),
                               child: TextFieldInput(
                                 hint: "email",
                                 textEditingController: username,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  32.0, 0.0, 32.0, 2.0),
+                              padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 2.0),
                               child: TextFieldPassword(
                                 textEditingController: password,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  32.0, 0.0, 32.0, 0.0),
+                              padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 0.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
                                     "mot de passe oublié?",
-                                    style:
-                                        styleSmall.copyWith(color: colorAccent),
+                                    style: styleSmall.copyWith(color: colorAccent),
                                   )
                                 ],
                               ),
@@ -129,21 +124,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             GestureDetector(
                               onTap: () {
-                                authBloc.add(AuthEventSignIn(
-                                    email: username.text,
-                                    password: password.text));
+                                authBloc.add(AuthEventSignIn(email: username.text, password: password.text));
                               },
                               child: Container(
                                 padding: EdgeInsets.all(32.0),
-                                decoration: BoxDecoration(
-                                    borderRadius: radiusHalf,
-                                    color: colorPrime),
+                                decoration: BoxDecoration(borderRadius: radiusHalf, color: colorPrime),
                                 width: MediaQuery.of(context).size.width,
                                 child: Center(
                                     child: Text(
                                   "Se connecter",
-                                  style: styleSimplePlus.copyWith(
-                                      color: colorMain),
+                                  style: styleSimplePlus.copyWith(color: colorMain),
                                 )),
                               ),
                             )
