@@ -39,13 +39,29 @@ class _HeaderUserState extends State<HeaderUser> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "Bonjour ${widget.user.getFullName()}",
-                        style: styleSimplePlus.copyWith(color: colorMain),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width -
+                            8.0 -
+                            8.0 -
+                            60.0 -
+                            8.0 -
+                            8.0,
+                        child: Text(
+                          "Bonjour ${widget.user.getFullName()}",
+                          style: styleSimplePlus.copyWith(color: colorMain),
+                        ),
                       ),
-                      Text(
-                        widget.user.sub,
-                        style: styleSmall.copyWith(color: colorMain),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width -
+                            8.0 -
+                            8.0 -
+                            60.0 -
+                            8.0 -
+                            8.0,
+                        child: Text(
+                          widget.user.sub,
+                          style: styleSmall.copyWith(color: colorMain),
+                        ),
                       ),
                     ],
                   )

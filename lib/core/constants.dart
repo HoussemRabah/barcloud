@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Color colorMain = Color(0xFFFFFFFF);
-Color colorBack = Color(0xFFFFFFFF);
+Color colorBack = Color.fromARGB(255, 236, 239, 241);
 Color colorFront = Color(0xFF000000);
 Color colorPrime = Color(0xFF6399CB);
 Color colorAccent = Color(0xFFA6C2DD);

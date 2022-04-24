@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../core/constants.dart';
+import '../../../core/sys.dart';
 import '../../../modules/class.dart';
 
 class TaskCard extends StatefulWidget {
@@ -52,7 +53,7 @@ class _TaskCardState extends State<TaskCard> {
                     40.0 -
                     32.0,
                 child: Text(
-                  "deadline : ${widget.task.deadline.toDate().toString()}",
+                  "deadline : ${timeToString(widget.task.deadline)}",
                   style: styleSmall.copyWith(color: colorAccent),
                 ),
               ),
@@ -90,15 +91,27 @@ Widget getImageByType(TaskType type) {
 Widget getImageByProcess(TaskProcess type) {
   switch (type) {
     case TaskProcess.wait:
-      return Text("waiting");
+      return Icon(
+        LineIcons.pause,
+        color: colorAccent,
+      );
 
     case TaskProcess.begin:
-      return Text("waiting");
+      return Icon(
+        LineIcons.play,
+        color: colorPrime,
+      );
 
     case TaskProcess.end:
-      return Text("waiting");
+      return Icon(
+        LineIcons.check,
+        color: Colors.green,
+      );
 
     case TaskProcess.error:
-      return Text("waiting");
+      return Icon(
+        LineIcons.exclamation,
+        color: Colors.red,
+      );
   }
 }

@@ -94,6 +94,8 @@ class _HomeAgentState extends State<HomeAgent> {
                   ),
                 ),
                 Wrap(
+                  runSpacing: 8.0,
+                  spacing: 8.0,
                   children: [
                     OptionCard(
                         image: "assets/checklist.png",
