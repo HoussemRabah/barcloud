@@ -1,9 +1,11 @@
 import 'package:barcloud/UI/screens/pages/login.dart';
+import 'package:barcloud/UI/screens/pages/tasks.dart';
 import 'package:barcloud/UI/widgets/cards/option.dart';
 import 'package:barcloud/UI/widgets/cards/task.dart';
 import 'package:barcloud/UI/widgets/headers/header.dart';
 import 'package:barcloud/UI/widgets/ui/titleline.dart';
 import 'package:barcloud/core/constants.dart';
+import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,7 +63,9 @@ class _HomeAgentState extends State<HomeAgent> {
                     children: [
                       TitleLine(
                         title: "vos taches",
-                        todo: () {},
+                        todo: () {
+                          openScreen(context, TasksScreen());
+                        },
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
