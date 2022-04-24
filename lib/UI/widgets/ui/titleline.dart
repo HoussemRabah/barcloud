@@ -27,13 +27,11 @@ class _TitleLineState extends State<TitleLine> {
         if (widget.todo != null) Spacer(),
         if (widget.todo != null)
           GestureDetector(
-            onTap: (widget.todo != null) ? widget.todo!() : () {},
-            child: Icon(
-              LineIcons.arrowRight,
-              size: 30,
-              color: colorPrime,
-            ),
-          )
+              onTap: (widget.todo != null) ? widget.todo!() : () {},
+              child: Text(
+                "afficher plus",
+                style: styleSimple.copyWith(color: colorAccent),
+              ))
       ],
     );
   }
