@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../../core/constantS.dart';
+import '../../../core/constants.dart';
 
 class TitleLine extends StatefulWidget {
   final String title;
