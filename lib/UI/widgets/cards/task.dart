@@ -59,7 +59,9 @@ class _TaskCardState extends State<TaskCard> {
               ),
             ],
           ),
-          getImageByProcess(widget.task.process)
+          Spacer(),
+          getImageByProcess(widget.task.process),
+          Spacer(),
         ],
       ),
     );
@@ -94,24 +96,28 @@ Widget getImageByProcess(TaskProcess type) {
       return Icon(
         LineIcons.pause,
         color: colorAccent,
+        size: 40,
       );
 
     case TaskProcess.begin:
       return Icon(
         LineIcons.play,
         color: colorPrime,
+        size: 40,
       );
 
     case TaskProcess.end:
       return Icon(
         LineIcons.check,
         color: Colors.green,
+        size: 40,
       );
 
     case TaskProcess.error:
       return Icon(
         LineIcons.exclamation,
         color: Colors.red,
+        size: 40,
       );
   }
 }

@@ -2,6 +2,7 @@ import 'package:barcloud/UI/screens/pages/login.dart';
 import 'package:barcloud/UI/widgets/cards/option.dart';
 import 'package:barcloud/UI/widgets/cards/task.dart';
 import 'package:barcloud/UI/widgets/headers/header.dart';
+import 'package:barcloud/UI/widgets/ui/titleline.dart';
 import 'package:barcloud/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,12 +59,9 @@ class _HomeAgentState extends State<HomeAgent> {
                 if (state is TaskStateLoaded)
                   return Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "vos taches",
-                          style: styleSimplePlus.copyWith(color: colorAccent),
-                        ),
+                      TitleLine(
+                        title: "vos taches",
+                        todo: () {},
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -86,13 +84,7 @@ class _HomeAgentState extends State<HomeAgent> {
             // options
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "options",
-                    style: styleSimplePlus.copyWith(color: colorAccent),
-                  ),
-                ),
+                TitleLine(title: "options"),
                 Wrap(
                   runSpacing: 8.0,
                   spacing: 8.0,
