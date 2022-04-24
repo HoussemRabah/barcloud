@@ -77,7 +77,7 @@ class _HomeAgentState extends State<HomeAgent> {
                       ),
                     ],
                   );
-                if (state is TaskStateEmpty) return Text("empry");
+                if (state is TaskStateEmpty) return Text("empty");
                 return Loading();
               },
             ),

@@ -28,6 +28,7 @@ class _TaskCardState extends State<TaskCard> {
               width: 60.0,
               height: 60.0,
               child: getImageByType(widget.task.type)),
+          SizedBox(width: 8.0),
           Column(
             children: [
               SizedBox(
@@ -36,6 +37,7 @@ class _TaskCardState extends State<TaskCard> {
                     8.0 * 2 -
                     60.0 -
                     40.0 -
+                    8.0 -
                     32.0,
                 child: Text(
                   widget.task.title,
