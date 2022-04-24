@@ -10,6 +10,9 @@ part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   List<Task>? tasks = [];
+  int? tasksWaiting;
+  int? tasksFinished;
+
   TaskBloc() : super(TaskInitial()) {
     on<TaskEvent>((event, emit) async {
       if (event is TaskEventInit) {
@@ -22,6 +25,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         emit(TaskStateLoading());
         tasks =
             await databaseRepository.getTasks(authBloc.authRepository.user!.id);
+        tasksWaiting = getNumberTasksWaiting();
+        tasksFinished = getNumberTasksFinished();
+
         if (tasks == null)
           emit(TaskStateError());
         else if (tasks!.isNotEmpty)
@@ -31,4 +37,21 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       }
     });
   }
+
+  int? getNumberTasksWaiting() => (tasks == null)
+      ? null
+      : (tasks)!
+          .where(
+            (element) => (element.process == TaskProcess.begin ||
+                element.process == TaskProcess.wait),
+          )
+          .length;
+
+  int? getNumberTasksFinished() => (tasks == null)
+      ? null
+      : (tasks)!
+          .where(
+            (element) => (element.process == TaskProcess.end),
+          )
+          .length;
 }

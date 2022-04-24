@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../logic/bloc/auth/auth_bloc.dart';
 import '../../../logic/bloc/task/task_bloc.dart';
 import '../../widgets/headers/headerTasks.dart';
+import '../../widgets/loading/loading.dart';
 import 'login.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -35,7 +36,15 @@ class _TasksScreenState extends State<TasksScreen> {
           backgroundColor: colorBack,
           body: Column(
             children: [
-              HeaderTasks(),
+              BlocBuilder<TaskBloc, TaskState>(
+                builder: (context, state) {
+                  if (state is TaskStateLoading) return Loading();
+                  return HeaderTasks(
+                    taskFinish: taskBloc.tasksFinished ?? 0,
+                    taskWaiting: taskBloc.tasksWaiting ?? 0,
+                  );
+                },
+              ),
             ],
           ),
         ),

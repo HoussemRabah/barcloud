@@ -2,7 +2,11 @@ import 'package:barcloud/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class HeaderTasks extends StatefulWidget {
-  const HeaderTasks({Key? key}) : super(key: key);
+  final int taskFinish;
+  final int taskWaiting;
+  const HeaderTasks(
+      {Key? key, required this.taskFinish, required this.taskWaiting})
+      : super(key: key);
 
   @override
   State<HeaderTasks> createState() => _HeaderTasksState();
@@ -20,18 +24,28 @@ class _HeaderTasksState extends State<HeaderTasks> {
         ),
         padding: EdgeInsets.all(8.0),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "51",
-                  style: styleSimplePlus.copyWith(color: colorFront),
+                SizedBox(
+                  width: 100,
+                  child: Text(
+                    "${widget.taskWaiting}",
+                    style: styleTitle.copyWith(color: colorMain),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                Text(
-                  "tâches inachevée",
-                  style: styleSmall.copyWith(color: colorFront),
+                SizedBox(
+                  width: 100,
+                  child: Text(
+                    "tâches inachevée",
+                    style: styleSmall.copyWith(color: colorMain),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
@@ -39,16 +53,24 @@ class _HeaderTasksState extends State<HeaderTasks> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "51",
-                  style: styleSimplePlus.copyWith(color: colorFront),
+                SizedBox(
+                  width: 100,
+                  child: Text(
+                    "${widget.taskFinish}",
+                    style: styleTitle.copyWith(color: colorMain),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                Text(
-                  "tâches inachevée",
-                  style: styleSmall.copyWith(color: colorFront),
+                SizedBox(
+                  width: 100,
+                  child: Text(
+                    "tâches accomplies",
+                    style: styleSmall.copyWith(color: colorMain),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
-            )
+            ),
           ],
         ));
   }
