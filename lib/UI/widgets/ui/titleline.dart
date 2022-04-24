@@ -27,10 +27,14 @@ class _TitleLineState extends State<TitleLine> {
         if (widget.todo != null) Spacer(),
         if (widget.todo != null)
           GestureDetector(
-              onTap: (widget.todo != null) ? widget.todo!() : () {},
+              onTap: (widget.todo != null)
+                  ? () {
+                      widget.todo!();
+                    }
+                  : () {},
               child: Text(
                 "afficher plus",
-                style: styleSimple.copyWith(color: colorAccent),
+                style: styleSmall.copyWith(color: colorAccent),
               ))
       ],
     );
