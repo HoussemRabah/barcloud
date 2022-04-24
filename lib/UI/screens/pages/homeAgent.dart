@@ -1,4 +1,5 @@
 import 'package:barcloud/UI/screens/pages/login.dart';
+import 'package:barcloud/UI/widgets/cards/option.dart';
 import 'package:barcloud/UI/widgets/cards/task.dart';
 import 'package:barcloud/UI/widgets/headers/header.dart';
 import 'package:barcloud/core/constants.dart';
@@ -77,12 +78,43 @@ class _HomeAgentState extends State<HomeAgent> {
                       ),
                     ],
                   );
-                if (state is TaskStateEmpty) return Text("empty");
+                if (state is TaskStateEmpty) return SizedBox();
                 return Loading();
               },
             ),
 
             // options
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "options",
+                    style: styleSimplePlus.copyWith(color: colorAccent),
+                  ),
+                ),
+                Wrap(
+                  children: [
+                    OptionCard(
+                        image: "assets/checklist.png",
+                        title: "inventaire",
+                        todo: () {}),
+                    OptionCard(
+                        image: "assets/scanner.png",
+                        title: "scanner le code",
+                        todo: () {}),
+                    OptionCard(
+                        image: "assets/print.png",
+                        title: "imprimer code",
+                        todo: () {}),
+                    OptionCard(
+                        image: "assets/additem.svg",
+                        title: "ajouter un item",
+                        todo: () {}),
+                  ],
+                )
+              ],
+            )
           ])),
         ),
       ),
