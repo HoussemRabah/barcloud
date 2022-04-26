@@ -71,6 +71,7 @@ class DatabaseRepository {
     return Task(
         id: map["id"],
         dower: map["dower"],
+        creator: map["creator"],
         zone: map["zone"],
         type: getTaskType(map["type"]),
         title: map["title"],

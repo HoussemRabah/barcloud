@@ -89,6 +89,7 @@ class Item {
 class Task {
   String id;
   String dower;
+  String creator;
   String zone;
   TaskType type;
   String title;
@@ -96,6 +97,7 @@ class Task {
   Timestamp deadline;
   TaskProcess process;
   Future<TheUser> getDower() => DatabaseRepository().getUser(dower);
+  Future<TheUser> getCreator() => DatabaseRepository().getUser(creator);
   Future<Zone> getZone() => DatabaseRepository().getZone(zone);
   Task(
       {required this.id,
@@ -105,5 +107,6 @@ class Task {
       required this.title,
       required this.disc,
       required this.deadline,
-      required this.process});
+      required this.process,
+      required this.creator});
 }
