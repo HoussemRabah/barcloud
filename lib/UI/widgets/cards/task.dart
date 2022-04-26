@@ -21,7 +21,7 @@ class _TaskCardState extends State<TaskCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        openScreen(context, TaskScreen(taskId: widget.task.id));
+        openScreen(context, TaskScreen(task: widget.task));
       },
       child: Container(
         decoration: BoxDecoration(
