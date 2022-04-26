@@ -10,6 +10,7 @@ part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   List<Task>? tasks = [];
+  Task? taskOpened;
   int? tasksWaiting;
   int? tasksFinished;
 
@@ -34,6 +35,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           emit(TaskStateLoaded());
         else
           emit(TaskStateEmpty());
+      }
+      if (event is TaskEventGetTask) {
+        emit(TaskStateLoading());
+        taskOpened = (tasks ?? []).firstWhere(
+          (element) => element.id == event.taskId,
+        );
+        emit(TaskStateLoaded());
       }
     });
   }
