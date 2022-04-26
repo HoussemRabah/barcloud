@@ -11,8 +11,8 @@ import '../../../logic/bloc/auth/auth_bloc.dart';
 import '../../../logic/bloc/task/task_bloc.dart';
 
 class TaskScreen extends StatefulWidget {
-  final String taskId;
-  const TaskScreen({Key? key, required this.taskId}) : super(key: key);
+  final Task task;
+  const TaskScreen({Key? key, required this.task}) : super(key: key);
 
   @override
   State<TaskScreen> createState() => _TaskScreenState();
@@ -27,7 +27,7 @@ class _TaskScreenState extends State<TaskScreen> {
           value: authBloc,
         ),
         BlocProvider<TaskBloc>.value(
-          value: taskBloc..add(TaskEventGetTask(widget.taskId)),
+          value: taskBloc,
         ),
       ],
       child: SafeArea(
@@ -44,17 +44,18 @@ class _TaskScreenState extends State<TaskScreen> {
               BlocBuilder<TaskBloc, TaskState>(
                 builder: (context, state) {
                   if (state is TaskStateLoaded)
-                    return FutureBuilder<TheUser?>(
-                        future: taskBloc.taskOpened!.getDower(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<TheUser?> snapshot) {
-                          if (snapshot.hasData) if (snapshot.data != null)
-                            return UserLabel(
-                                username: snapshot.data!.getFullName(),
-                                image: snapshot.data!.getImage(),
-                                sub: snapshot.data!.sub);
-                          return Loading();
-                        });
+                    return FutureBuilder(
+                      future: widget.task.getDower(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<TheUser?> snapshot) {
+                        if (snapshot.hasData) if (snapshot.data != null)
+                          return UserLabel(
+                              username: snapshot.data!.getFullName(),
+                              image: snapshot.data!.getImage(),
+                              sub: snapshot.data!.sub);
+                        return Loading();
+                      },
+                    );
                   return Loading();
                 },
               ),

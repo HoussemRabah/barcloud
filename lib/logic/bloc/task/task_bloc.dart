@@ -36,13 +36,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         else
           emit(TaskStateEmpty());
       }
-      if (event is TaskEventGetTask) {
-        emit(TaskStateLoading());
-        taskOpened = (tasks ?? []).firstWhere(
-          (element) => element.id == event.taskId,
-        );
-        emit(TaskStateLoaded());
-      }
     });
   }
 
