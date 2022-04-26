@@ -6,6 +6,7 @@ import 'package:barcloud/UI/widgets/headers/header.dart';
 import 'package:barcloud/UI/widgets/ui/titleline.dart';
 import 'package:barcloud/core/constants.dart';
 import 'package:barcloud/logic/functions/navigation.dart';
+import 'package:barcloud/modules/class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,7 +74,10 @@ class _HomeAgentState extends State<HomeAgent> {
                           itemBuilder: (BuildContext context, int index) {
                             return TaskCard(task: taskBloc.tasks![index]);
                           },
-                          itemCount: taskBloc.tasks!.length,
+                          itemCount: taskBloc.tasks!
+                              .where((element) =>
+                                  (element.process != TaskProcess.end))
+                              .length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                         ),

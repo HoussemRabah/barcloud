@@ -8,6 +8,8 @@ enum Role { agent, ing, admin }
 
 enum TaskType { checklist, edit, add }
 
+enum TaskProcess { wait, begin, error, end }
+
 TaskType getTaskType(String type) {
   switch (type) {
     case "checklist":
@@ -21,8 +23,6 @@ TaskType getTaskType(String type) {
   }
   return TaskType.checklist;
 }
-
-enum TaskProcess { wait, begin, error, end }
 
 TaskProcess getTaskProcess(String process) {
   switch (process) {

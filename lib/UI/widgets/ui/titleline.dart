@@ -32,9 +32,12 @@ class _TitleLineState extends State<TitleLine> {
                       widget.todo!();
                     }
                   : () {},
-              child: Text(
-                "afficher plus",
-                style: styleSmall.copyWith(color: colorAccent),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "afficher plus",
+                  style: styleSmall.copyWith(color: colorAccent),
+                ),
               ))
       ],
     );
