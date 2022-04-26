@@ -45,7 +45,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 builder: (context, state) {
                   if (state is TaskStateLoaded)
                     return FutureBuilder(
-                      future: widget.task.getDower(),
+                      future: widget.task.getCreator(),
                       builder: (BuildContext context,
                           AsyncSnapshot<TheUser?> snapshot) {
                         if (snapshot.hasData) if (snapshot.data != null)
