@@ -1,3 +1,4 @@
+import 'package:barcloud/UI/widgets/loading/loading.dart';
 import 'package:barcloud/UI/widgets/textfields/input.dart';
 import 'package:barcloud/UI/widgets/textfields/password.dart';
 import 'package:barcloud/core/constants.dart';
@@ -38,10 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   email: username.text, password: password.text));
             },
             child: Container(
-              padding: EdgeInsets.all(32.0),
+              padding: EdgeInsets.all(8.0),
               decoration:
                   BoxDecoration(borderRadius: radiusHalf, color: colorPrime),
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width - 32,
               height: 60.0,
               child: Center(
                   child: Text(
@@ -61,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SvgPicture.asset(
                       "assets/shapeBack.svg",
                       width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.fitWidth,
+                      height: MediaQuery.of(context).size.height * 0.5,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       if (state is AuthStateLoading)
-                        return Center(child: Text("loading"));
+                        return Loading();
                       else
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
