@@ -71,6 +71,8 @@ Widget getImageByType(TaskType type) {
     case TaskType.add:
       return SvgPicture.asset(
         "additem.svg",
+        width: 30,
+        height: 30,
       );
 
     case TaskType.edit:
