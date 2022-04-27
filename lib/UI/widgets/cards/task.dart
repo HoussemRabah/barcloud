@@ -100,10 +100,9 @@ Widget getImageByType(TaskType type) {
 Widget getImageByProcess(TaskProcess type) {
   switch (type) {
     case TaskProcess.wait:
-      return Icon(
-        LineIcons.pause,
-        color: colorAccent,
-        size: 40,
+      return Text(
+        "en pause",
+        style: styleSmall.copyWith(color: colorAccent),
       );
 
     case TaskProcess.begin:
