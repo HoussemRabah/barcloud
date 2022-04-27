@@ -20,13 +20,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEvent>((event, emit) async {
       if (event is AuthEventInit) {
         context = event.context;
-        emit(AuthStateLoading());
         await authRepository.authListen(signedOut: () {
-          if (ModalRoute.of(context!)!.isCurrent)
+          if (ModalRoute.of(context!)!.isCurrent) {
+            print("object");
+
             emit(AuthStateDone());
-          else
+          } else
             newScreen(context!, LoginScreen());
-          emit(AuthStateDone());
         }, signedIn: () {
           switch (authRepository.user!.role.name) {
             case "agent":
