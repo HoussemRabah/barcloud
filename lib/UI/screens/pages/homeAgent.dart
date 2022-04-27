@@ -71,7 +71,7 @@ class _HomeAgentState extends State<HomeAgent> {
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
                           itemBuilder: (BuildContext context, int index) {
-                            return TaskCard(task: taskBloc.tasks!.where((element) => (element.process != TaskProcess.end))[index]);
+                            return TaskCard(task: taskBloc.tasks!.where((element) => (element.process != TaskProcess.end)).toList()[index]);
                           },
                           itemCount: taskBloc.tasks!.where((element) => (element.process != TaskProcess.end)).length,
                           physics: NeverScrollableScrollPhysics(),
