@@ -47,8 +47,7 @@ class _HomeAgentState extends State<HomeAgent> {
             // header
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
-                if (state is AuthStateDone)
-                  return HeaderUser(user: authBloc.authRepository.user!);
+                if (state is AuthStateDone) return HeaderUser(user: authBloc.authRepository.user!);
                 return Loading();
               },
             ),
@@ -72,12 +71,9 @@ class _HomeAgentState extends State<HomeAgent> {
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
                           itemBuilder: (BuildContext context, int index) {
-                            return TaskCard(task: taskBloc.tasks![index]);
+                            return TaskCard(task: taskBloc.tasks!.where((element) => (element.process != TaskProcess.end))[index]);
                           },
-                          itemCount: taskBloc.tasks!
-                              .where((element) =>
-                                  (element.process != TaskProcess.end))
-                              .length,
+                          itemCount: taskBloc.tasks!.where((element) => (element.process != TaskProcess.end)).length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                         ),
@@ -97,22 +93,10 @@ class _HomeAgentState extends State<HomeAgent> {
                   runSpacing: 8.0,
                   spacing: 8.0,
                   children: [
-                    OptionCard(
-                        image: "assets/checklist.png",
-                        title: "inventaire",
-                        todo: () {}),
-                    OptionCard(
-                        image: "assets/scanner.png",
-                        title: "scanner le code",
-                        todo: () {}),
-                    OptionCard(
-                        image: "assets/print.png",
-                        title: "imprimer code",
-                        todo: () {}),
-                    OptionCard(
-                        image: "assets/additem.svg",
-                        title: "ajouter un item",
-                        todo: () {}),
+                    OptionCard(image: "assets/checklist.png", title: "inventaire", todo: () {}),
+                    OptionCard(image: "assets/scanner.png", title: "scanner le code", todo: () {}),
+                    OptionCard(image: "assets/print.png", title: "imprimer code", todo: () {}),
+                    OptionCard(image: "assets/additem.svg", title: "ajouter un item", todo: () {}),
                   ],
                 )
               ],
