@@ -30,6 +30,26 @@ class _LoginScreenState extends State<LoginScreen> {
       value: authBloc..add(AuthEventInit(context: context)),
       child: SafeArea(
         child: Scaffold(
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: GestureDetector(
+            onTap: () {
+              authBloc.add(AuthEventSignIn(
+                  email: username.text, password: password.text));
+            },
+            child: Container(
+              padding: EdgeInsets.all(32.0),
+              decoration:
+                  BoxDecoration(borderRadius: radiusHalf, color: colorPrime),
+              width: MediaQuery.of(context).size.width,
+              height: 60.0,
+              child: Center(
+                  child: Text(
+                "Se connecter",
+                style: styleSimplePlus.copyWith(color: colorMain),
+              )),
+            ),
+          ),
           backgroundColor: colorBack,
           body: Column(
             children: [
@@ -48,7 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
                           child: Text(
                             "BarCloud",
                             style: styleTitle.copyWith(color: colorPrime),
@@ -58,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 200.0,
                           child: Text(
                             "Facilitez le travail d'inventaire",
-                            style: styleSimplePlus.copyWith(color: colorAccent),
+                            style: styleSimple.copyWith(color: colorAccent),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -66,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Positioned(
                         left: 75.0,
-                        top: 120.0,
+                        top: 150.0,
                         child: Image.asset(
                           "assets/boxes.png",
                           fit: BoxFit.scaleDown,
@@ -81,7 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.5,
-                  decoration: BoxDecoration(borderRadius: radiusHalf, color: colorMain),
+                  decoration:
+                      BoxDecoration(borderRadius: radiusHalf, color: colorMain),
                   child: BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       if (state is AuthStateLoading)
@@ -92,51 +114,39 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 8.0),
+                              padding: const EdgeInsets.fromLTRB(
+                                  32.0, 32.0, 32.0, 8.0),
                               child: TextFieldInput(
                                 hint: "email",
                                 textEditingController: username,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 2.0),
+                              padding: const EdgeInsets.fromLTRB(
+                                  32.0, 0.0, 32.0, 2.0),
                               child: TextFieldPassword(
                                 textEditingController: password,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(32.0, 0.0, 32.0, 0.0),
+                              padding: const EdgeInsets.fromLTRB(
+                                  32.0, 0.0, 32.0, 0.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
                                     "mot de passe oublié?",
-                                    style: styleSmall.copyWith(color: colorAccent),
+                                    style:
+                                        styleSmall.copyWith(color: colorAccent),
                                   )
                                 ],
                               ),
                             ),
-                            Spacer(),
                             if (state is AuthStateError)
                               Text(
                                 state.errorMessage,
                                 style: styleSimple.copyWith(color: colorRed),
                               ),
-                            GestureDetector(
-                              onTap: () {
-                                authBloc.add(AuthEventSignIn(email: username.text, password: password.text));
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(32.0),
-                                decoration: BoxDecoration(borderRadius: radiusHalf, color: colorPrime),
-                                width: MediaQuery.of(context).size.width,
-                                child: Center(
-                                    child: Text(
-                                  "Se connecter",
-                                  style: styleSimplePlus.copyWith(color: colorMain),
-                                )),
-                              ),
-                            )
                           ],
                         );
                     },
