@@ -107,10 +107,9 @@ Widget getImageByProcess(TaskProcess type) {
       );
 
     case TaskProcess.begin:
-      return Icon(
-        LineIcons.play,
-        color: colorPrime,
-        size: 40,
+      return Text(
+        "en cours",
+        style: styleSmall.copyWith(color: colorAccent),
       );
 
     case TaskProcess.end:
