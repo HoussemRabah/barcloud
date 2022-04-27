@@ -24,40 +24,25 @@ class _TaskCardState extends State<TaskCard> {
         openScreen(context, TaskScreen(task: widget.task));
       },
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: radius,
-            color: colorMain,
-            boxShadow: [BoxShadow(color: colorAccent)]),
+        decoration: BoxDecoration(borderRadius: radius, color: colorMain, boxShadow: [
+          BoxShadow(color: colorAccent)
+        ]),
         padding: EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Container(
-                width: 60.0,
-                height: 60.0,
-                child: getImageByType(widget.task.type)),
+            Container(width: 60.0, height: 60.0, child: getImageByType(widget.task.type)),
             SizedBox(width: 8.0),
             Column(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width -
-                      8.0 * 2 -
-                      8.0 * 2 -
-                      60.0 -
-                      40.0 -
-                      8.0 -
-                      32.0,
+                  width: MediaQuery.of(context).size.width - 8.0 * 2 - 8.0 * 2 - 60.0 - 40.0 - 8.0 - 32.0,
                   child: Text(
                     widget.task.title,
                     style: styleSimple,
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width -
-                      8.0 * 2 -
-                      8.0 * 2 -
-                      60.0 -
-                      40.0 -
-                      32.0,
+                  width: MediaQuery.of(context).size.width - 8.0 * 2 - 8.0 * 2 - 60.0 - 40.0 - 32.0,
                   child: Text(
                     "deadline : ${timeToString(widget.task.deadline)}",
                     style: styleSmall.copyWith(color: colorAccent),
@@ -86,7 +71,6 @@ Widget getImageByType(TaskType type) {
     case TaskType.add:
       return SvgPicture.asset(
         "additem.svg",
-        fit: BoxFit.scaleDown,
       );
 
     case TaskType.edit:
