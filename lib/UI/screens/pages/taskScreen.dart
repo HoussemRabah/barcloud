@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:barcloud/UI/screens/pages/login.dart';
 import 'package:barcloud/UI/widgets/loading/loading.dart';
 import 'package:barcloud/UI/widgets/ui/titleline.dart';
@@ -33,8 +35,12 @@ class _TaskScreenState extends State<TaskScreen> {
       ],
       child: SafeArea(
         child: Scaffold(
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Container(
             margin: EdgeInsets.all(8.0),
+            height: 60,
+            width: MediaQuery.of(context).size.width * 16.0,
             decoration: BoxDecoration(borderRadius: radius, color: colorPrime),
             alignment: Alignment.center,
             child: Padding(
@@ -52,6 +58,7 @@ class _TaskScreenState extends State<TaskScreen> {
           backgroundColor: colorBack,
           body: SingleChildScrollView(
               child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TitleLine(title: "de la part de"),
               BlocBuilder<TaskBloc, TaskState>(
@@ -72,25 +79,43 @@ class _TaskScreenState extends State<TaskScreen> {
                   return Loading();
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget.task.title,
-                  style: styleSimplePlus.copyWith(color: colorPrime),
-                ),
+              SizedBox(
+                height: 32.0,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "deadline : ${timeToString(widget.task.deadline)}",
-                  style: styleSimple.copyWith(color: colorAccent),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget.task.disc,
-                  style: styleSimple,
+              Container(
+                margin: EdgeInsets.all(8.0),
+                padding: EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8.0),
+                decoration:
+                    BoxDecoration(borderRadius: radius, color: colorMain),
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                      child: Text(
+                        widget.task.title,
+                        style: styleSimplePlus.copyWith(color: colorPrime),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                      child: Text(
+                        "deadline : ${timeToString(widget.task.deadline)}",
+                        style: styleSmall.copyWith(color: colorAccent),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 32.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                      child: Text(
+                        widget.task.disc,
+                        style: styleSimple,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
