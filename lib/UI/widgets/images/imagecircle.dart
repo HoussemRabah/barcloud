@@ -1,3 +1,4 @@
+import 'package:barcloud/UI/widgets/loading/loading.dart';
 import 'package:flutter/material.dart';
 
 class ImageCircle extends StatefulWidget {
@@ -15,7 +16,8 @@ class _ImageCircleState extends State<ImageCircle> {
         width: 60.0,
         clipBehavior: Clip.hardEdge,
         height: 60.0,
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(360))),
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(360))),
         child: FutureBuilder(
           future: widget.img,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -24,7 +26,7 @@ class _ImageCircleState extends State<ImageCircle> {
                 snapshot.data!,
               );
             }
-            return Text("loading");
+            return Loading();
           },
         ));
   }
