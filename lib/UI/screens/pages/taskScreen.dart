@@ -7,6 +7,7 @@ import 'package:barcloud/modules/class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/sys.dart';
 import '../../../logic/bloc/auth/auth_bloc.dart';
 import '../../../logic/bloc/task/task_bloc.dart';
 
@@ -32,6 +33,18 @@ class _TaskScreenState extends State<TaskScreen> {
       ],
       child: SafeArea(
         child: Scaffold(
+          floatingActionButton: Container(
+            margin: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(borderRadius: radius, color: colorPrime),
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "Démarrer la tache",
+                style: styleSimplePlus.copyWith(color: colorMain),
+              ),
+            ),
+          ),
           appBar: AppBar(
             backgroundColor: colorPrime,
             elevation: 0.0,
@@ -40,7 +53,7 @@ class _TaskScreenState extends State<TaskScreen> {
           body: SingleChildScrollView(
               child: Column(
             children: [
-              TitleLine(title: "assosi a partir de"),
+              TitleLine(title: "de la part de"),
               BlocBuilder<TaskBloc, TaskState>(
                 builder: (context, state) {
                   if (state is TaskStateLoaded)
@@ -58,6 +71,27 @@ class _TaskScreenState extends State<TaskScreen> {
                     );
                   return Loading();
                 },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget.task.title,
+                  style: styleSimplePlus.copyWith(color: colorPrime),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "deadline : ${timeToString(widget.task.deadline)}",
+                  style: styleSimple.copyWith(color: colorAccent),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget.task.disc,
+                  style: styleSimple,
+                ),
               ),
             ],
           )),

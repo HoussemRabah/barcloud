@@ -42,7 +42,7 @@ class _UserLabelState extends State<UserLabel> {
                     8.0,
                 child: Text(
                   "${widget.username}",
-                  style: styleSimplePlus.copyWith(color: colorMain),
+                  style: styleSimple.copyWith(color: colorFront),
                 ),
               ),
               SizedBox(
@@ -54,7 +54,7 @@ class _UserLabelState extends State<UserLabel> {
                     8.0,
                 child: Text(
                   widget.sub,
-                  style: styleSmall.copyWith(color: colorMain),
+                  style: styleSmall.copyWith(color: colorAccent),
                 ),
               ),
             ],
