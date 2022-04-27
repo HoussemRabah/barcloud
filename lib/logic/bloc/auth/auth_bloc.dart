@@ -21,7 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event is AuthEventInit) {
         context = event.context;
         emit(AuthStateLoading());
-        authRepository.authListen(signedOut: () {
+        await authRepository.authListen(signedOut: () {
           if (ModalRoute.of(context!)!.isCurrent)
             emit(AuthStateDone());
           else

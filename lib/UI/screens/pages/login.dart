@@ -31,26 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
       value: authBloc..add(AuthEventInit(context: context)),
       child: SafeArea(
         child: Scaffold(
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: GestureDetector(
-            onTap: () {
-              authBloc.add(AuthEventSignIn(
-                  email: username.text, password: password.text));
-            },
-            child: Container(
-              padding: EdgeInsets.all(8.0),
-              decoration:
-                  BoxDecoration(borderRadius: radiusHalf, color: colorPrime),
-              width: MediaQuery.of(context).size.width - 32,
-              height: 60.0,
-              child: Center(
-                  child: Text(
-                "Se connecter",
-                style: styleSimplePlus.copyWith(color: colorMain),
-              )),
-            ),
-          ),
           backgroundColor: colorBack,
           body: Column(
             children: [
@@ -59,10 +39,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: [
-                    SvgPicture.asset(
-                      "assets/shapeBack.svg",
+                    Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.5,
+                      child: SvgPicture.asset(
+                        "assets/shapeBack.svg",
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -148,6 +131,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                 state.errorMessage,
                                 style: styleSimple.copyWith(color: colorRed),
                               ),
+                            GestureDetector(
+                              onTap: () {
+                                authBloc.add(AuthEventSignIn(
+                                    email: username.text,
+                                    password: password.text));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: radius, color: colorPrime),
+                                width: MediaQuery.of(context).size.width - 32,
+                                height: 60.0,
+                                child: Center(
+                                    child: Text(
+                                  "Se connecter",
+                                  style: styleSimplePlus.copyWith(
+                                      color: colorMain),
+                                )),
+                              ),
+                            ),
                           ],
                         );
                     },
