@@ -19,8 +19,8 @@ class AuthRepository {
     }
   }
 
-  authListen({required Function signedOut, required Function signedIn}) {
-    db.authStateChanges().listen((User? user) async {
+  authListen({required Function signedOut, required Function signedIn}) async {
+    await db.authStateChanges().listen((User? user) async {
       if (user == null) {
         this.user = null;
         signedOut();

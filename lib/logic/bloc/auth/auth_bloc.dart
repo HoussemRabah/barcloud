@@ -26,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(AuthStateDone());
           else
             newScreen(context!, LoginScreen());
+          emit(AuthStateDone());
         }, signedIn: () {
           switch (authRepository.user!.role.name) {
             case "agent":

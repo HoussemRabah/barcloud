@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Positioned(
                         left: 75.0,
-                        top: 150.0,
+                        top: 100.0,
                         child: Image.asset(
                           "assets/boxes.png",
                           fit: BoxFit.scaleDown,
