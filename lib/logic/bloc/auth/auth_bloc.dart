@@ -21,7 +21,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event is AuthEventInit) {
         context = event.context;
         emit(AuthStateLoading());
-        await Future.delayed(Duration(seconds: 1));
         authRepository.authListen(signedOut: () {
           if (ModalRoute.of(context!)!.isCurrent)
             emit(AuthStateDone());
@@ -50,7 +49,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (event is AuthEventSignIn) {
         emit(AuthStateLoading());
-        await Future.delayed(Duration(milliseconds: 500));
         bool result = await authRepository.signIn(
             email: event.email, password: event.password);
         if (!result) {
