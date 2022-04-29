@@ -23,7 +23,6 @@ class AuthRepository {
       print(response.body);
       this.user = TheUser.fromJson(jsonDecode(response.body));
       return true;
-      // Album.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load album');
     }
