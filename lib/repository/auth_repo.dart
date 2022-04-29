@@ -17,12 +17,19 @@ class AuthRepository {
     String api = "auth.php";
     api = api + "?userId=" + email;
     api = api + "&password=" + password;
-    final response = await http.get(Uri.parse('$server/$api'));
+    final response = await http.get(Uri.parse('$server/$api'),
+        headers: {"Accept": "application/json"});
 
     if (response.statusCode == 200) {
-      print(response.body);
-      this.user = TheUser.fromJson(jsonDecode(response.body));
-      return true;
+      Map data = jsonDecode(response.body);
+      if (data["status"]) {
+        this.user = TheUser.fromJson(data["user"]);
+        this.errorMessage = null;
+        return true;
+      } else {
+        this.errorMessage = data["message"];
+        return false;
+      }
     } else {
       throw Exception('Failed to load album');
     }

@@ -65,7 +65,8 @@ class TheUser {
       img: json['image'],
       nom: json['nom'],
       prenom: json['prenom'],
-      role: json['role'],
+      role:
+          Role.values.where((element) => (element.name == json['role'])).first,
       sub: json['sub'],
     );
   }
