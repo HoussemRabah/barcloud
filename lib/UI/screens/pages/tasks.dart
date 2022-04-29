@@ -60,7 +60,9 @@ class _TasksScreenState extends State<TasksScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
                           itemBuilder: (BuildContext context, int index) {
-                            return TaskCard(task: taskBloc.tasks![index]);
+                            return TaskCard(task: taskBloc.tasks!
+                              .where((element) => 
+                                  (element.process != TaskProcess.end)).toList()[index]);
                           },
                           itemCount: taskBloc.tasks!
                               .where((element) =>

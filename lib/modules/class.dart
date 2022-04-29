@@ -59,6 +59,16 @@ class TheUser {
       required this.role,
       this.user,
       required this.img});
+  factory TheUser.fromJson(Map<String, dynamic> json) {
+    return TheUser(
+      id: json['userId'],
+      img: json['image'],
+      nom: json['nom'],
+      prenom: json['prenom'],
+      role: json['role'],
+      sub: json['sub'],
+    );
+  }
 }
 
 class Zone {

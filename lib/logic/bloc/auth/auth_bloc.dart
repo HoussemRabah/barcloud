@@ -20,28 +20,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEvent>((event, emit) async {
       if (event is AuthEventInit) {
         context = event.context;
-        await authRepository.authListen(signedOut: () {
-          if (ModalRoute.of(context!)!.isCurrent) {
-            print("object");
-
-            emit(AuthStateDone());
-          } else
-            newScreen(context!, LoginScreen());
-        }, signedIn: () {
-          switch (authRepository.user!.role.name) {
-            case "agent":
-              newScreen(context!, HomeAgent());
-              break;
-
-            case "ing":
-              newScreen(context!, HomeIng());
-              break;
-
-            case "admin":
-              newScreen(context!, HomeAdmin());
-              break;
-          }
-        });
       }
       if (event is AuthEventRefresh) {
         emit(AuthStateLoading());
@@ -55,6 +33,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (!result) {
           emit(AuthStateError(
               errorMessage: authRepository.errorMessage ?? "error 0"));
+        } else {
+          switch (authRepository.user!.role.name) {
+            case "agent":
+              newScreen(context!, HomeAgent());
+              break;
+
+            case "ing":
+              newScreen(context!, HomeIng());
+              break;
+
+            case "admin":
+              newScreen(context!, HomeAdmin());
+              break;
+          }
         }
       }
     });

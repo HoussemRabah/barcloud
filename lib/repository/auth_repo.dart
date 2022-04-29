@@ -1,41 +1,32 @@
+import 'dart:convert';
+
 import 'package:barcloud/UI/screens/pages/login.dart';
 import 'package:barcloud/logic/bloc/auth/auth_bloc.dart';
 import 'package:barcloud/modules/class.dart';
 import 'package:barcloud/repository/database_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
+
+import '../core/constants.dart';
 
 class AuthRepository {
-  FirebaseAuth db = FirebaseAuth.instance;
   TheUser? user;
   String? errorMessage;
 
   Future<bool> signIn({required String email, required String password}) async {
-    try {
-      await db.signInWithEmailAndPassword(email: email, password: password);
-      return true;
-    } on FirebaseAuthException catch (e) {
-      handleError(e.code);
-      return false;
-    }
-  }
+    String api = "auth.php";
+    api = api + "?userId=" + email;
+    api = api + "&password=" + password;
+    final response = await http.get(Uri.parse('$server/$api'));
 
-  authListen({required Function signedOut, required Function signedIn}) async {
-    await db.authStateChanges().listen((User? user) async {
-      if (user == null) {
-        this.user = null;
-        signedOut();
-      } else {
-        Map userData = await DatabaseRepository().getMap("/user/${user.uid}/");
-        this.user = DatabaseRepository().fromMapTheUser(userData, user);
-        DatabaseRepository().onUserChange(user.uid, () async {
-          Map userData =
-              await DatabaseRepository().getMap("/user/${user.uid}/");
-          this.user = DatabaseRepository().fromMapTheUser(userData, user);
-          authBloc.add(AuthEventRefresh());
-        });
-        signedIn();
-      }
-    });
+    if (response.statusCode == 200) {
+      print(response.body);
+      this.user = TheUser.fromJson(jsonDecode(response.body));
+      return true;
+      // Album.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load album');
+    }
   }
 
   // todo : add explanation to errors , search about "firebase auth erros code" on google
