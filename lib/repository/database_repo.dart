@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 import '../core/constants.dart';
 import '../modules/class.dart';
@@ -53,6 +54,7 @@ class DatabaseRepository {
         return null;
       }
     } catch (e) {
+      print(e);
       return null;
     }
     return tasks;
@@ -93,7 +95,10 @@ class DatabaseRepository {
             .first,
         title: map["title"],
         disc: map["disc"],
-        deadline: (map["deadline"] as Timestamp),
+        deadline: Timestamp.fromMillisecondsSinceEpoch(
+            DateFormat('MM-dd-yyyy hh:mm:ss')
+                .parse(map["deadline"])
+                .millisecondsSinceEpoch),
         process: TaskProcess.values
             .where((element) => element.name == map["process"])
             .first);
