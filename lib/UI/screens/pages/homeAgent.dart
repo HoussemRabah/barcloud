@@ -47,9 +47,7 @@ class _HomeAgentState extends State<HomeAgent> {
             // header
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
-                if (state is AuthStateDone)
-                  return HeaderUser(user: authBloc.authRepository.user!);
-                return Loading();
+                return HeaderUser(user: authBloc.authRepository.user!);
               },
             ),
             // tasks
