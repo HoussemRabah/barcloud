@@ -20,32 +20,28 @@ class AuthRepository {
     final response = await http.get(Uri.parse('$server/$api'),
         headers: {"Accept": "application/json"});
 
-    if (response.statusCode == 200) {
-      Map data = jsonDecode(response.body);
-      if (data["status"]) {
-        this.user = TheUser.fromJson(data["user"]);
-        this.errorMessage = null;
-        return true;
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          this.user = TheUser.fromJson(data["user"]);
+          this.errorMessage = null;
+          return true;
+        } else {
+          this.errorMessage = data["message"];
+          return false;
+        }
       } else {
-        this.errorMessage = data["message"];
+        this.errorMessage = 'oops! erreur';
+
         return false;
       }
-    } else {
-      throw Exception('Failed to load album');
+    } catch (e) {
+      this.errorMessage = 'oops! erreur';
+
+      return false;
     }
   }
 
-  // todo : add explanation to errors , search about "firebase auth erros code" on google
-  handleError(String? code) {
-    if (code == null)
-      errorMessage = null;
-    else
-      switch (code) {
-        case 'user-not-found':
-          errorMessage = "l'email n'appartient a aucun utilisateur";
-          break;
-        default:
-          errorMessage = code;
-      }
-  }
+ 
 }

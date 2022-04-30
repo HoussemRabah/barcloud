@@ -17,9 +17,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc() : super(TaskInitial()) {
     on<TaskEvent>((event, emit) async {
       if (event is TaskEventInit) {
-        databaseRepository.onTaskChange(authBloc.authRepository.user!.id, () {
-          taskBloc.add(TaskEventFetch());
-        });
         taskBloc.add(TaskEventFetch());
       }
       if (event is TaskEventFetch) {

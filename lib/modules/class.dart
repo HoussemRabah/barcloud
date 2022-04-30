@@ -107,9 +107,9 @@ class Task {
   String disc;
   Timestamp deadline;
   TaskProcess process;
-  Future<TheUser> getDower() => DatabaseRepository().getUser(dower);
-  Future<TheUser> getCreator() => DatabaseRepository().getUser(creator);
-  Future<Zone> getZone() => DatabaseRepository().getZone(zone);
+  Future<TheUser?> getDower() => DatabaseRepository().getUser(dower);
+  Future<TheUser?> getCreator() => DatabaseRepository().getUser(creator);
+  Future<Zone?> getZone() => DatabaseRepository().getZone(zone);
   Task(
       {required this.id,
       required this.dower,

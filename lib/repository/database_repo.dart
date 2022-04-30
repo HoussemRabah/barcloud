@@ -1,82 +1,102 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../core/constants.dart';
 import '../modules/class.dart';
+import 'package:http/http.dart' as http;
 
 class DatabaseRepository {
-  Future<Map> getMap(String path) async {
-    DocumentSnapshot doc = await FirebaseFirestore.instance.doc(path).get();
-    return doc.data() as Map;
+  Future<http.Response> getData(
+      {required String apiName, required String args}) async {
+    String api = apiName;
+    api = api + args;
+    return await http.get(Uri.parse('$server/$api'),
+        headers: {"Accept": "application/json"});
   }
 
-  Future<TheUser> getUser(String id) async {
-    return fromMapTheUser(await getMap("/user/$id/"), null);
-  }
+  Future<TheUser?> getUser(String id) async {
+    final response =
+        await getData(apiName: "getUserById.php", args: "?userId=$id");
 
-  Future<Zone> getZone(String id) async {
-    return fromMapZone(await getMap("/zone/$id/"));
-  }
-
-  Future<Task> getTask(String taskId, String id) async {
-    return fromMapTask(await getMap("/task/$id/tasks/$taskId"));
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          return TheUser.fromJson(data["user"]);
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<List<Task>?> getTasks(String id) async {
     List<Task>? tasks = [];
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection("task/$id/tasks/").get();
+    final response =
+        await getData(apiName: "getTasksOfUser.php", args: "?userId=$id");
 
-    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-    allData.forEach((map) {
-      if (tasks != null) tasks.add(fromMapTask(map as Map<String, dynamic>));
-    });
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          for (Map taskMap in data["tasks"]) tasks.add(fromMapTask(taskMap));
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
     return tasks;
   }
 
-  onTaskChange(String id, Function todo) async {
-    FirebaseFirestore.instance
-        .collection("task/$id/tasks/")
-        .snapshots()
-        .listen((event) {
-      todo();
-    });
-  }
+  Future<Zone?> getZone(String id) async {
+    Zone? zone;
+    final response =
+        await getData(apiName: "getZoneById.php", args: "?zoneId=$id");
 
-  onUserChange(String id, Function todo) async {
-    FirebaseFirestore.instance.doc("/user/$id/").snapshots().listen((event) {
-      todo();
-    });
-  }
-
-  TheUser fromMapTheUser(Map map, User? user) {
-    return TheUser(
-        id: map["id"],
-        nom: map["nom"],
-        prenom: map["prenom"],
-        img: map["img"],
-        sub: map["sub"],
-        role: (map["role"] == "agent")
-            ? Role.agent
-            : (map["role"] == "admin")
-                ? Role.admin
-                : Role.ing,
-        user: user);
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          return (fromMapZone(data["zone"]));
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 
   Zone fromMapZone(Map map) {
-    return Zone(id: map["id"], name: map["nom"]);
+    return Zone(id: map["id"], name: map["title"]);
   }
 
   Task fromMapTask(Map map) {
     return Task(
-        id: map["id"],
-        dower: map["dower"],
-        creator: map["creator"],
-        zone: map["zone"],
-        type: getTaskType(map["type"]),
+        id: map["taskId"],
+        dower: map["agentId"],
+        creator: map["adminId"],
+        zone: map["zoneId"],
+        type: TaskType.values
+            .where((element) => element.name == map["type"])
+            .first,
         title: map["title"],
         disc: map["disc"],
         deadline: (map["deadline"] as Timestamp),
-        process: getTaskProcess(map["process"]));
+        process: TaskProcess.values
+            .where((element) => element.name == map["process"])
+            .first);
   }
 }
