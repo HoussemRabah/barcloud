@@ -24,25 +24,41 @@ class _TaskCardState extends State<TaskCard> {
         openScreen(context, TaskScreen(task: widget.task));
       },
       child: Container(
-        decoration: BoxDecoration(borderRadius: radius, color: colorMain, boxShadow: [
-          BoxShadow(color: colorAccent)
-        ]),
+        margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
+        decoration: BoxDecoration(
+            borderRadius: radius,
+            color: colorMain,
+            boxShadow: [BoxShadow(color: colorAccent)]),
         padding: EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Container(width: 60.0, height: 60.0, child: getImageByType(widget.task.type)),
+            Container(
+                width: 60.0,
+                height: 60.0,
+                child: getImageByType(widget.task.type)),
             SizedBox(width: 8.0),
             Column(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width - 8.0 * 2 - 8.0 * 2 - 60.0 - 40.0 - 8.0 - 32.0,
+                  width: MediaQuery.of(context).size.width -
+                      8.0 * 2 -
+                      8.0 * 2 -
+                      60.0 -
+                      40.0 -
+                      8.0 -
+                      32.0,
                   child: Text(
                     widget.task.title,
                     style: styleSimple,
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width - 8.0 * 2 - 8.0 * 2 - 60.0 - 40.0 - 32.0,
+                  width: MediaQuery.of(context).size.width -
+                      8.0 * 2 -
+                      8.0 * 2 -
+                      60.0 -
+                      40.0 -
+                      32.0,
                   child: Text(
                     "deadline : ${timeToString(widget.task.deadline)}",
                     style: styleSmall.copyWith(color: colorAccent),
@@ -51,7 +67,9 @@ class _TaskCardState extends State<TaskCard> {
               ],
             ),
             Spacer(),
-            getImageByProcess(widget.task.process),
+            SizedBox(
+                width: 32.0 + 40.0 - 8.0,
+                child: getImageByProcess(widget.task.process)),
             Spacer(),
           ],
         ),
@@ -85,7 +103,7 @@ Widget getImageByProcess(TaskProcess type) {
   switch (type) {
     case TaskProcess.wait:
       return Text(
-        "en pause",
+        "pause",
         style: styleSmall.copyWith(color: colorAccent),
       );
 
