@@ -59,7 +59,6 @@ class DatabaseRepository {
   }
 
   Future<Zone?> getZone(String id) async {
-    Zone? zone;
     final response =
         await getData(apiName: "getZoneById.php", args: "?zoneId=$id");
 
@@ -80,7 +79,7 @@ class DatabaseRepository {
   }
 
   Zone fromMapZone(Map map) {
-    return Zone(id: map["id"], name: map["title"]);
+    return Zone(id: map["zoneId"], name: map["title"]);
   }
 
   Task fromMapTask(Map map) {
