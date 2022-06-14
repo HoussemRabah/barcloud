@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
-
 import '../core/constants.dart';
 import '../modules/class.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +18,7 @@ class DatabaseRepository {
   Future<TheUser?> getUser(String id) async {
     final response =
         await getData(apiName: "getUserById.php", args: "?userId=$id");
-
+    print(id);
     try {
       if (response.statusCode == 200) {
         Map data = jsonDecode(response.body);
@@ -33,6 +31,7 @@ class DatabaseRepository {
         return null;
       }
     } catch (e) {
+      print(e);
       return null;
     }
   }
@@ -41,16 +40,16 @@ class DatabaseRepository {
     List<Task>? tasks = [];
     final response =
         await getData(apiName: "getTasksOfUser.php", args: "?userId=$id");
-
     try {
       if (response.statusCode == 200) {
         Map data = jsonDecode(response.body);
         if (data["status"]) {
           for (Map taskMap in data["tasks"]) tasks.add(fromMapTask(taskMap));
         } else {
-          return null;
+          return [];
         }
       } else {
+        print(response.body);
         return null;
       }
     } catch (e) {

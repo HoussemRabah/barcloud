@@ -35,7 +35,8 @@ class _TaskScreenState extends State<TaskScreen> {
       ],
       child: SafeArea(
         child: Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Container(
             margin: EdgeInsets.all(8.0),
             height: 60,
@@ -65,12 +66,21 @@ class _TaskScreenState extends State<TaskScreen> {
                   if (state is TaskStateLoaded)
                     return FutureBuilder(
                       future: widget.task.getCreator(),
-                      builder: (BuildContext context, AsyncSnapshot<TheUser?> snapshot) {
-                        if (snapshot.hasData) if (snapshot.data != null) return UserLabel(username: snapshot.data!.getFullName(), image: snapshot.data!.getImage(), sub: snapshot.data!.sub);
+                      builder: (BuildContext context,
+                          AsyncSnapshot<TheUser?> snapshot) {
+                        if (snapshot.hasData) {
+                          if (snapshot.data != null)
+                            return UserLabel(
+                                username: snapshot.data!.getFullName(),
+                                image: snapshot.data!.getImage(),
+                                sub: snapshot.data!.sub);
+                          print(snapshot.data);
+                        }
                         return Loading();
                       },
                     );
-                  return Loading();
+                  else
+                    return Loading();
                 },
               ),
               SizedBox(
@@ -79,7 +89,8 @@ class _TaskScreenState extends State<TaskScreen> {
               Container(
                 margin: EdgeInsets.all(8.0),
                 padding: EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8.0),
-                decoration: BoxDecoration(borderRadius: radius, color: colorMain),
+                decoration:
+                    BoxDecoration(borderRadius: radius, color: colorMain),
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
