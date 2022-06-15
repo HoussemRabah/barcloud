@@ -4,6 +4,8 @@ import 'package:barcloud/UI/widgets/cards/option.dart';
 import 'package:barcloud/UI/widgets/cards/task.dart';
 import 'package:barcloud/UI/widgets/headers/header.dart';
 import 'package:barcloud/UI/widgets/ui/titleline.dart';
+import 'package:barcloud/UI/screens/pages/Inv.dart';
+
 import 'package:barcloud/core/constants.dart';
 import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:barcloud/modules/class.dart';
@@ -102,7 +104,9 @@ class _HomeAgentState extends State<HomeAgent> {
                     OptionCard(
                         image: "assets/checklist.png",
                         title: "inventaire",
-                        todo: () {}),
+                        todo: () {
+                          openScreen(context, InvScreen());
+                        }),
                     OptionCard(
                         image: "assets/scanner.png",
                         title: "scanner le code",

@@ -23,7 +23,9 @@ class _OptionCardState extends State<OptionCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.todo(),
+      onTap: () {
+        widget.todo();
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: radius,

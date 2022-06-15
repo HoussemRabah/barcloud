@@ -59,6 +59,28 @@ class DatabaseRepository {
     return tasks;
   }
 
+  Future<List<Zone>?> getZones(String userId) async {
+    List<Zone>? zones = [];
+    final response =
+        await getData(apiName: "getZoneByUser.php", args: "?userId=$userId");
+
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          for (Map zoneMap in data["zones"]) zones.add(fromMapZone(zoneMap));
+          return zones;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<Zone?> getZone(String id) async {
     final response =
         await getData(apiName: "getZoneById.php", args: "?zoneId=$id");

@@ -37,63 +37,65 @@ class _TasksScreenState extends State<TasksScreen> {
             elevation: 0.0,
           ),
           backgroundColor: colorBack,
-          body: Column(
-            children: [
-              BlocBuilder<TaskBloc, TaskState>(
-                builder: (context, state) {
-                  if (state is TaskStateLoading) return Loading();
-                  return HeaderTasks(
-                    taskFinish: taskBloc.tasksFinished ?? 0,
-                    taskWaiting: taskBloc.tasksWaiting ?? 0,
-                  );
-                },
-              ),
-              BlocBuilder<TaskBloc, TaskState>(
-                builder: (context, state) {
-                  if (state is TaskStateLoading) return Loading();
-                  if (state is TaskStateError) return Loading();
-                  if (state is TaskStateEmpty) return Text("error");
-                  return Column(
-                    children: [
-                      TitleLine(title: "vos taches"),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          itemBuilder: (BuildContext context, int index) {
-                            return TaskCard(
-                                task: taskBloc.tasks!
-                                    .where((element) =>
-                                        (element.process != TaskProcess.end))
-                                    .toList()[index]);
-                          },
-                          itemCount: taskBloc.tasks!
-                              .where((element) =>
-                                  (element.process != TaskProcess.end))
-                              .length,
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                BlocBuilder<TaskBloc, TaskState>(
+                  builder: (context, state) {
+                    if (state is TaskStateLoading) return Loading();
+                    return HeaderTasks(
+                      taskFinish: taskBloc.tasksFinished ?? 0,
+                      taskWaiting: taskBloc.tasksWaiting ?? 0,
+                    );
+                  },
+                ),
+                BlocBuilder<TaskBloc, TaskState>(
+                  builder: (context, state) {
+                    if (state is TaskStateLoading) return Loading();
+                    if (state is TaskStateError) return Loading();
+                    if (state is TaskStateEmpty) return Text("error");
+                    return Column(
+                      children: [
+                        TitleLine(title: "vos taches"),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListView.builder(
+                            itemBuilder: (BuildContext context, int index) {
+                              return TaskCard(
+                                  task: taskBloc.tasks!
+                                      .where((element) =>
+                                          (element.process != TaskProcess.end))
+                                      .toList()[index]);
+                            },
+                            itemCount: taskBloc.tasks!
+                                .where((element) =>
+                                    (element.process != TaskProcess.end))
+                                .length,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                          ),
                         ),
-                      ),
-                      TitleLine(title: "tâches accomplies"),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          itemBuilder: (BuildContext context, int index) {
-                            return TaskCard(task: taskBloc.tasks![index]);
-                          },
-                          itemCount: taskBloc.tasks!
-                              .where((element) =>
-                                  (element.process == TaskProcess.end))
-                              .length,
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
+                        TitleLine(title: "tâches accomplies"),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListView.builder(
+                            itemBuilder: (BuildContext context, int index) {
+                              return TaskCard(task: taskBloc.tasks![index]);
+                            },
+                            itemCount: taskBloc.tasks!
+                                .where((element) =>
+                                    (element.process == TaskProcess.end))
+                                .length,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ],
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

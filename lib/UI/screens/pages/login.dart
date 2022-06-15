@@ -3,6 +3,7 @@ import 'package:barcloud/UI/widgets/textfields/input.dart';
 import 'package:barcloud/UI/widgets/textfields/password.dart';
 import 'package:barcloud/core/constants.dart';
 import 'package:barcloud/logic/bloc/auth/auth_bloc.dart';
+import 'package:barcloud/logic/bloc/zone/zone_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ import '../../../repository/database_repo.dart';
 AuthBloc authBloc = AuthBloc(context: null);
 DatabaseRepository databaseRepository = DatabaseRepository();
 TaskBloc taskBloc = TaskBloc();
+ZoneBloc zoneBloc = ZoneBloc();
 
 TextEditingController username = TextEditingController();
 TextEditingController password = TextEditingController();
