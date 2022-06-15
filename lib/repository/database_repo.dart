@@ -67,18 +67,20 @@ class DatabaseRepository {
     try {
       if (response.statusCode == 200) {
         Map data = jsonDecode(response.body);
+
         if (data["status"]) {
           for (Map zoneMap in data["zones"]) zones.add(fromMapZone(zoneMap));
-          return zones;
         } else {
-          return null;
+          return [];
         }
       } else {
         return null;
       }
     } catch (e) {
+      print(e);
       return null;
     }
+    return zones;
   }
 
   Future<Zone?> getZone(String id) async {

@@ -20,10 +20,8 @@ class ZoneBloc extends Bloc<ZoneEvent, ZoneState> {
 
         if (zones == null)
           emit(ZoneStateError());
-        else if (zones!.isNotEmpty)
-          emit(ZoneStateLoaded());
         else
-          emit(ZoneStateEmpty());
+          emit(ZoneStateLoaded());
       }
     });
   }
