@@ -17,8 +17,57 @@ class CategorieBloc extends Bloc<CategorieEvent, CategorieState> {
   List<SubCategorie>? subCategories = [];
   List<ItemType>? itemTypes = [];
   List<Item>? items = [];
+
+  String getSelected(String change) {
+    switch (change) {
+      case "zone":
+        return selectedZone;
+
+      case "cat":
+        return selectedCat;
+
+      default:
+        return selectedSub;
+    }
+  }
+
+  List<Item> getSelectedItems() {
+    return items!
+        .where((element) =>
+            ((element.type.name == selectedType || selectedType == "tous") &&
+                (subCategories!
+                            .where((e) => e.id == element.type.subCategoryId)
+                            .first
+                            .name ==
+                        selectedSub ||
+                    selectedSub == "tous")))
+        .toList();
+  }
+
+  List<SubCategorie> getSelectedSub() {
+    return subCategories!
+        .where((element) =>
+            ((element.name == selectedSub || selectedSub == "tous")))
+        .toList();
+  }
+
   CategorieBloc() : super(CategorieInitial()) {
     on<CategorieEvent>((event, emit) async {
+      if (event is CategorieEventChange) {
+        switch (event.change) {
+          case "zone":
+            selectedZone = event.value;
+            break;
+          case "cat":
+            selectedCat = event.value;
+            break;
+          case "sub":
+            selectedSub = event.value;
+            break;
+        }
+        emit(CategorieStateLoaded());
+      }
+
       if (event is CategorieEventFetch) {
         emit(CategorieStateLoading());
         categories = await databaseRepository.getCategories();
@@ -27,15 +76,17 @@ class CategorieBloc extends Bloc<CategorieEvent, CategorieState> {
 
         itemTypes = await databaseRepository.getItemTypes();
 
-        items = await databaseRepository.getItems(itemTypes ?? []);
+        items = await databaseRepository.getItems(itemTypes ?? []) ?? []
+          ..where((element) => element.zoneId == event.zone.id).toList();
 
         if (categories == null ||
             subCategories == null ||
             itemTypes == null ||
             items == null)
           emit(CategorieStateError());
-        else
+        else {
           emit(CategorieStateLoaded());
+        }
       }
     });
   }

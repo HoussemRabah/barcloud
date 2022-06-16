@@ -51,7 +51,7 @@ class _InvScreenState extends State<InvScreen> {
                           for (Zone zone in zoneBloc.zones!)
                             GestureDetector(
                                 onTap: () {
-                                  openScreen(context, ItemsScreen());
+                                  openScreen(context, ItemsScreen(zone: zone,));
                                 },
                                 child: ZoneCard(zone: zone)),
                         ],

@@ -18,8 +18,9 @@ TaskBloc taskBloc = TaskBloc();
 ZoneBloc zoneBloc = ZoneBloc();
 CategorieBloc categorieBloc = CategorieBloc();
 
-TextEditingController username = TextEditingController();
-TextEditingController password = TextEditingController();
+TextEditingController username =
+    TextEditingController(text: "houssemranah@gmail.com");
+TextEditingController password = TextEditingController(text: "123456789");
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

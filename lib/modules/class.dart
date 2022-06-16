@@ -104,8 +104,10 @@ class Item {
   String name;
   String image;
   ItemType type;
+  String zoneId;
   Item(
       {required this.id,
+      required this.zoneId,
       required this.type,
       required this.name,
       required this.image});

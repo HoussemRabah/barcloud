@@ -132,12 +132,13 @@ class DatabaseRepository {
   }
 
   Future<List<Item>?> getItemsByZone(
-      String zoneId, List<ItemType> itemTypes) async {
+      List<ItemType> itemTypes, String zoneId) async {
     List<Item>? items = [];
-    final response =
-        await getData(apiName: "getItemsByZone.php", args: "?zoneId=$zoneId");
 
     try {
+      final response =
+          await getData(apiName: "getitembyzone.php", args: "?zoneId=$zoneId");
+
       if (response.statusCode == 200) {
         Map data = jsonDecode(response.body);
 
@@ -241,6 +242,7 @@ class DatabaseRepository {
         id: map["itemId"],
         name: map["name"],
         image: map["image"],
+        zoneId: map["zoneId"],
         type: itemTypes
             .where((element) => element.id == map["itemTypeId"])
             .first);
