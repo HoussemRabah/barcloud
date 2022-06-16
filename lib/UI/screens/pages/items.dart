@@ -12,7 +12,8 @@ import '../../../modules/class.dart';
 import 'login.dart';
 
 class ItemsScreen extends StatefulWidget {
-  const ItemsScreen({Key? key}) : super(key: key);
+  final Zone zone;
+  const ItemsScreen({Key? key, required this.zone}) : super(key: key);
 
   @override
   State<ItemsScreen> createState() => _ItemsScreenState();
@@ -23,11 +24,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ZoneBloc>.value(
-          value: zoneBloc..add(ZoneEventFetch()),
-        ),
         BlocProvider<CategorieBloc>.value(
-          value: categorieBloc..add(CategorieEventFetch()),
+          value: categorieBloc..add(CategorieEventFetch(zone: widget.zone)),
         ),
       ],
       child: SafeArea(
@@ -40,61 +38,38 @@ class _ItemsScreenState extends State<ItemsScreen> {
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "zones",
-                    style: styleSimplePlus.copyWith(color: colorAccent),
-                  ),
-                  BlocBuilder<ZoneBloc, ZoneState>(
-                    builder: (context, state) {
-                      if (state is ZoneStateLoaded)
-                        return ChipsLine(data: [
-                          for (Zone zone in zoneBloc.zones!) zone.name
-                        ], todo: () {});
-                      return Loading();
-                    },
-                  ),
-                  Text(
-                    "categories",
-                    style: styleSimplePlus.copyWith(color: colorAccent),
-                  ),
-                  BlocBuilder<CategorieBloc, CategorieState>(
-                    builder: (context, state) {
-                      if (state is CategorieStateLoaded)
-                        return ChipsLine(data: [
+              child: BlocBuilder<CategorieBloc, CategorieState>(
+                builder: (context, state) {
+                  if (state is CategorieStateLoaded)
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "categories",
+                          style: styleSimplePlus.copyWith(color: colorAccent),
+                        ),
+                        new ChipsLine(data: [
                           for (Categorie categorie in categorieBloc.categories!)
                             categorie.name
-                        ], todo: () {});
-                      return Loading();
-                    },
-                  ),
-                  Text(
-                    "sous-categories",
-                    style: styleSimplePlus.copyWith(color: colorAccent),
-                  ),
-                  BlocBuilder<CategorieBloc, CategorieState>(
-                    builder: (context, state) {
-                      if (state is CategorieStateLoaded)
-                        return ChipsLine(data: [
-                          for (SubCategorie categorie
-                              in categorieBloc.subCategories!)
-                            categorie.name
-                        ], todo: () {});
-                      return Loading();
-                    },
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  BlocBuilder<CategorieBloc, CategorieState>(
-                    builder: (context, state) {
-                      if (state is CategorieStateLoaded)
-                        return GroupedListView<Item, String>(
+                        ], change: "cat"),
+                        if (categorieBloc.selectedCat != "tous")
+                          Text(
+                            "sous-categories",
+                            style: styleSimplePlus.copyWith(color: colorAccent),
+                          ),
+                        if (categorieBloc.selectedCat != "tous")
+                          new ChipsLine(data: [
+                            for (SubCategorie categorie
+                                in categorieBloc.getSelectedSub())
+                              categorie.name
+                          ], change: "sub"),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        GroupedListView<Item, String>(
                           shrinkWrap: true,
-                          elements: categorieBloc.items ?? [],
+                          elements: categorieBloc.getSelectedItems(),
                           groupBy: (element) => element.type.name,
                           groupSeparatorBuilder: (String groupByValue) => Text(
                             groupByValue,
@@ -105,11 +80,14 @@ class _ItemsScreenState extends State<ItemsScreen> {
                           useStickyGroupSeparators: true, // optional
                           floatingHeader: true, // optional
                           order: GroupedListOrder.ASC, // optional
-                        );
-                      return Loading();
-                    },
-                  ),
-                ],
+                        ),
+                      ],
+                    );
+                  else if (state is CategorieStateError)
+                    return Text("error");
+                  else
+                    return Loading();
+                },
               ),
             ),
           ),
