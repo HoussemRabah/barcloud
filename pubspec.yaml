@@ -30,6 +30,7 @@ dependencies:
   google_fonts: ^2.3.1
   line_icons: ^2.0.1
   intl: ^0.17.0
+  grouped_list: ^5.1.1
 
 dev_dependencies:
   flutter_test:

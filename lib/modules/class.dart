@@ -78,23 +78,37 @@ class Zone {
   Zone({required this.id, required this.name});
 }
 
-class ItemType {
-  List<String> keys;
+class Categorie {
+  String id;
   String name;
-  Map data;
-  String categoryId;
+  Categorie({required this.id, required this.name});
+}
 
-  ItemType(
-      {required this.name,
-      required this.keys,
-      required this.data,
-      required this.categoryId});
+class SubCategorie {
+  String id;
+  String catId;
+  String name;
+  SubCategorie({required this.id, required this.catId, required this.name});
+}
+
+class ItemType {
+  String id;
+  String name;
+  String subCategoryId;
+
+  ItemType({required this.name, required this.id, required this.subCategoryId});
 }
 
 class Item {
   String id;
+  String name;
+  String image;
   ItemType type;
-  Item({required this.id, required this.type});
+  Item(
+      {required this.id,
+      required this.type,
+      required this.name,
+      required this.image});
 }
 
 class Task {
