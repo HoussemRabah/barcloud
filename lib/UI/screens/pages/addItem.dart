@@ -1,3 +1,4 @@
+import 'package:barcloud/UI/screens/pages/addItemData.dart';
 import 'package:barcloud/UI/widgets/loading/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import '../../../core/constants.dart';
 import '../../../logic/bloc/categorie/categorie_bloc.dart';
 import '../../../logic/bloc/item/item_bloc.dart';
 import '../../../logic/bloc/zone/zone_bloc.dart';
+import '../../../logic/functions/navigation.dart';
 import '../../../modules/class.dart';
 import '../../widgets/cards/itemtype.dart';
 import '../../widgets/ui/chips.dart';
@@ -72,7 +74,13 @@ class _AddItemState extends State<AddItem> {
                       itemCount: categorieBloc.getSelectedItemsType().length,
 
                       itemBuilder: (context, index) => GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            openScreen(
+                                context,
+                                AddItemData(
+                                    itemType: categorieBloc
+                                        .getSelectedItemsType()[index]));
+                          },
                           child: ItemTypeCard(
                               itemType: categorieBloc
                                   .getSelectedItemsType()[index])), // optional

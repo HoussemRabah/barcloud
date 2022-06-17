@@ -205,6 +205,31 @@ class DatabaseRepository {
     return items;
   }
 
+  Future<List<DataChamp>?> getDataChamps(String itemTypeId) async {
+    List<DataChamp>? zones = [];
+    final response = await getData(
+        apiName: "getDataChamps.php", args: "?itemTypeId=$itemTypeId");
+
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+
+        if (data["status"]) {
+          for (Map zoneMap in data["data"])
+            zones.add(fromMapDataChamps(zoneMap));
+        } else {
+          return [];
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+    return zones;
+  }
+
   Future<List<ItemData>?> getItemData(String itemId) async {
     List<ItemData>? zones = [];
     final response =
@@ -271,6 +296,13 @@ class DatabaseRepository {
     } catch (e) {
       return null;
     }
+  }
+
+  DataChamp fromMapDataChamps(Map map) {
+    return DataChamp(
+        id: map["dataChampId"],
+        name: map["dataChampName"],
+        type: map["dataChampType"]);
   }
 
   ItemData fromMapItemData(Map map) {

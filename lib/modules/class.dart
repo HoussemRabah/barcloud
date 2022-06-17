@@ -99,6 +99,14 @@ class ItemType {
   ItemType({required this.name, required this.id, required this.subCategoryId});
 }
 
+class DataChamp {
+  String id;
+  String name;
+  String type;
+
+  DataChamp({required this.name, required this.id, required this.type});
+}
+
 class ItemData {
   String dataId;
   String data;

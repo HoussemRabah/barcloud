@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../logic/bloc/categorie/categorie_bloc.dart';
+import '../../../logic/bloc/datachamp/datachamp_bloc.dart';
 import '../../../logic/bloc/task/task_bloc.dart';
 import '../../../repository/database_repo.dart';
 import '../../../repository/qr_repo.dart';
@@ -19,6 +20,7 @@ QrRepository qrRepository = QrRepository();
 TaskBloc taskBloc = TaskBloc();
 ZoneBloc zoneBloc = ZoneBloc();
 CategorieBloc categorieBloc = CategorieBloc();
+DatachampBloc datachampBloc = DatachampBloc();
 
 TextEditingController username =
     TextEditingController(text: "houssemranah@gmail.com");
