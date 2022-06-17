@@ -99,6 +99,18 @@ class ItemType {
   ItemType({required this.name, required this.id, required this.subCategoryId});
 }
 
+class ItemData {
+  String dataId;
+  String data;
+  String champName;
+  bool customAcess;
+  ItemData(
+      {required this.dataId,
+      required this.data,
+      required this.champName,
+      required this.customAcess});
+}
+
 class Item {
   String id;
   String name;

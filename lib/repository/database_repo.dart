@@ -182,6 +182,30 @@ class DatabaseRepository {
     return items;
   }
 
+  Future<List<ItemData>?> getItemData(String itemId) async {
+    List<ItemData>? zones = [];
+    final response =
+        await getData(apiName: "getDataByItem.php", args: "?itemId=$itemId");
+
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+
+        if (data["status"]) {
+          for (Map zoneMap in data["data"]) zones.add(fromMapItemData(zoneMap));
+        } else {
+          return [];
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+    return zones;
+  }
+
   Future<List<Zone>?> getZones(String userId) async {
     List<Zone>? zones = [];
     final response =
@@ -224,6 +248,14 @@ class DatabaseRepository {
     } catch (e) {
       return null;
     }
+  }
+
+  ItemData fromMapItemData(Map map) {
+    return ItemData(
+        dataId: map["dataId"],
+        data: map["data"],
+        champName: map["dataChampName"],
+        customAcess: map["customAcess"]);
   }
 
   Zone fromMapZone(Map map) {
