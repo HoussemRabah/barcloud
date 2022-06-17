@@ -20,28 +20,30 @@ class _ChipsLineState extends State<ChipsLine> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          GestureDetector(
-            onTap: () {
-              categorieBloc.add(
-                  CategorieEventChange(change: widget.change, value: "tous"));
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: radius,
-                  color: (categorieBloc.getSelected(widget.change) == "tous")
-                      ? colorPrime
-                      : colorMain),
-              margin: EdgeInsets.all(4.0),
-              padding: EdgeInsets.all(4.0),
-              child: Text(
-                "tous",
-                style: styleSmall.copyWith(
+          if (widget.change != "zone")
+            GestureDetector(
+              onTap: () {
+                categorieBloc.add(
+                    CategorieEventChange(change: widget.change, value: "tous"));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: radius,
                     color: (categorieBloc.getSelected(widget.change) == "tous")
-                        ? colorMain
-                        : colorFront),
+                        ? colorPrime
+                        : colorMain),
+                margin: EdgeInsets.all(4.0),
+                padding: EdgeInsets.all(4.0),
+                child: Text(
+                  "tous",
+                  style: styleSmall.copyWith(
+                      color:
+                          (categorieBloc.getSelected(widget.change) == "tous")
+                              ? colorMain
+                              : colorFront),
+                ),
               ),
             ),
-          ),
           for (String item in widget.data)
             GestureDetector(
               onTap: () {

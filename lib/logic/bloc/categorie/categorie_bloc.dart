@@ -87,8 +87,9 @@ class CategorieBloc extends Bloc<CategorieEvent, CategorieState> {
 
         itemTypes = await databaseRepository.getItemTypes();
         if (event.zone != null)
-          items = await databaseRepository.getItems(itemTypes ?? []) ?? []
-            ..where((element) => element.zoneId == event.zone!.id).toList();
+          items = (await databaseRepository.getItems(itemTypes ?? []) ?? [])
+              .where((element) => element.zoneId == event.zone!.id)
+              .toList();
 
         if (categories == null ||
             subCategories == null ||

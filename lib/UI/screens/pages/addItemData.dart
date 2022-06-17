@@ -1,5 +1,6 @@
 import 'package:barcloud/UI/widgets/loading/loading.dart';
 import 'package:barcloud/UI/widgets/textfields/input.dart';
+import 'package:barcloud/UI/widgets/ui/chips.dart';
 import 'package:barcloud/modules/class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,8 @@ class AddItemData extends StatefulWidget {
   @override
   State<AddItemData> createState() => _AddItemDataState();
 }
+
+Zone? _selected = null;
 
 class _AddItemDataState extends State<AddItemData> {
   @override
@@ -47,12 +50,53 @@ class _AddItemDataState extends State<AddItemData> {
               if (state is DatachampStateLoaded)
                 return Column(
                   children: [
+                    BlocBuilder<ZoneBloc, ZoneState>(
+                      builder: (context, state) {
+                        if (state is ZoneStateLoaded) {
+                          if (_selected == null)
+                            _selected = (zoneBloc.zones ?? []).first;
+                          return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  for (Zone zone in zoneBloc.zones ?? [])
+                                    GestureDetector(
+                                      onTap: () {
+                                        _selected = zone;
+                                        zoneBloc.add(ZoneEventRefresh());
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: radius,
+                                            color: (_selected == zone)
+                                                ? colorPrime
+                                                : colorMain),
+                                        padding: EdgeInsets.all(4.0),
+                                        margin: EdgeInsets.all(4.0),
+                                        child: Text(
+                                          zone.name,
+                                          style: styleSimple.copyWith(
+                                              color: (_selected == zone)
+                                                  ? colorMain
+                                                  : colorFront),
+                                        ),
+                                      ),
+                                    )
+                                ],
+                              ));
+                        }
+                        return Loading();
+                      },
+                    ),
                     for (DataChamp dataChamp in datachampBloc.dataChamps!)
-                      TextFieldInput(
-                          hint: dataChamp.name,
-                          textEditingController:
-                              datachampBloc.textcon[dataChamp.id] ??
-                                  TextEditingController())
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFieldInput(
+                            hint: dataChamp.name,
+                            textEditingController:
+                                datachampBloc.textcon[dataChamp.id] ??
+                                    TextEditingController()),
+                      )
                   ],
                 );
               return Loading();

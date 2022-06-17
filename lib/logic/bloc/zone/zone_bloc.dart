@@ -23,6 +23,9 @@ class ZoneBloc extends Bloc<ZoneEvent, ZoneState> {
         else
           emit(ZoneStateLoaded());
       }
+      if (event is ZoneEventRefresh) {
+        emit(ZoneStateLoaded());
+      }
     });
   }
 }

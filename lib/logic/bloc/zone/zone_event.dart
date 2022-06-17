@@ -6,3 +6,5 @@ abstract class ZoneEvent {}
 class ZoneEventInit extends ZoneEvent {}
 
 class ZoneEventFetch extends ZoneEvent {}
+
+class ZoneEventRefresh extends ZoneEvent {}
