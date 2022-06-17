@@ -36,6 +36,29 @@ class DatabaseRepository {
     }
   }
 
+  Future<bool> changeData(
+      String dataId, String itemId, String userId, String data) async {
+    final response = await getData(
+        apiName: "setData.php",
+        args: "?userId=$userId&dataId=$dataId&data=$data&itemId=$itemId");
+
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   Future<List<Task>?> getTasks(String id) async {
     List<Task>? tasks = [];
     final response =
@@ -255,7 +278,7 @@ class DatabaseRepository {
         dataId: map["dataId"],
         data: map["data"],
         champName: map["dataChampName"],
-        customAcess: map["customAcess"]);
+        customAcess: map["customAcess"] == "y" ? false : true);
   }
 
   Zone fromMapZone(Map map) {

@@ -1,7 +1,9 @@
+import 'package:barcloud/UI/screens/pages/itemscreen.dart';
 import 'package:barcloud/UI/widgets/cards/item.dart';
 import 'package:barcloud/UI/widgets/loading/loading.dart';
 import 'package:barcloud/UI/widgets/ui/chips.dart';
 import 'package:barcloud/core/constants.dart';
+import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -76,7 +78,12 @@ class _ItemsScreenState extends State<ItemsScreen> {
                             style: styleSimplePlus.copyWith(color: colorAccent),
                           ),
                           itemBuilder: (context, Item element) =>
-                              ItemCard(item: element), // optional
+                              GestureDetector(
+                                  onTap: () {
+                                    openScreen(context,
+                                        ItemScreen(itemId: element.id));
+                                  },
+                                  child: ItemCard(item: element)), // optional
                           useStickyGroupSeparators: true, // optional
                           floatingHeader: true, // optional
                           order: GroupedListOrder.ASC, // optional
