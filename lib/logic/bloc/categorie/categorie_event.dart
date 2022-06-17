@@ -6,7 +6,7 @@ abstract class CategorieEvent {}
 class CategorieEventInit extends CategorieEvent {}
 
 class CategorieEventFetch extends CategorieEvent {
-  Zone zone;
+  Zone? zone;
   CategorieEventFetch({required this.zone}) : super();
 }
 

@@ -31,6 +31,17 @@ class CategorieBloc extends Bloc<CategorieEvent, CategorieState> {
     }
   }
 
+  List<ItemType> getSelectedItemsType() {
+    return itemTypes!
+        .where((element) => ((subCategories!
+                    .where((e) => e.id == element.subCategoryId)
+                    .first
+                    .name ==
+                selectedSub ||
+            selectedSub == "tous")))
+        .toList();
+  }
+
   List<Item> getSelectedItems() {
     return items!
         .where((element) =>
@@ -75,9 +86,9 @@ class CategorieBloc extends Bloc<CategorieEvent, CategorieState> {
         subCategories = await databaseRepository.getSubCategories();
 
         itemTypes = await databaseRepository.getItemTypes();
-
-        items = await databaseRepository.getItems(itemTypes ?? []) ?? []
-          ..where((element) => element.zoneId == event.zone.id).toList();
+        if (event.zone != null)
+          items = await databaseRepository.getItems(itemTypes ?? []) ?? []
+            ..where((element) => element.zoneId == event.zone!.id).toList();
 
         if (categories == null ||
             subCategories == null ||

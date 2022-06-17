@@ -1,3 +1,4 @@
+import 'package:barcloud/UI/screens/pages/addItem.dart';
 import 'package:barcloud/UI/screens/pages/login.dart';
 import 'package:barcloud/UI/screens/pages/tasks.dart';
 import 'package:barcloud/UI/widgets/cards/option.dart';
@@ -118,7 +119,9 @@ class _HomeAgentState extends State<HomeAgent> {
                     OptionCard(
                         image: "assets/additem.svg",
                         title: "ajouter un item",
-                        todo: () {}),
+                        todo: () {
+                          openScreen(context, AddItem());
+                        }),
                   ],
                 )
               ],
