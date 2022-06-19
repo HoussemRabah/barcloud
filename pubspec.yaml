@@ -31,6 +31,8 @@ dependencies:
   line_icons: ^2.0.1
   intl: ^0.17.0
   grouped_list: ^5.1.1
+  http_requests: ^1.4.0
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

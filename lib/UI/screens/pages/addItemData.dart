@@ -1,6 +1,8 @@
+import 'package:barcloud/UI/screens/views/qrView.dart';
 import 'package:barcloud/UI/widgets/loading/loading.dart';
 import 'package:barcloud/UI/widgets/textfields/input.dart';
 import 'package:barcloud/UI/widgets/ui/chips.dart';
+import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:barcloud/modules/class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,7 +98,25 @@ class _AddItemDataState extends State<AddItemData> {
                             textEditingController:
                                 datachampBloc.textcon[dataChamp.id] ??
                                     TextEditingController()),
-                      )
+                      ),
+                    GestureDetector(
+                      onTap: () async {
+                        datachampBloc.add(DatachampEventCreate(
+                            context: context,
+                            itemTypeId: widget.itemType.id,
+                            zoneId: _selected!.id));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: radius, color: colorPrime),
+                        padding: EdgeInsets.all(8.0),
+                        margin: EdgeInsets.all(8.0),
+                        child: Text(
+                          "ajouter",
+                          style: styleSimplePlus.copyWith(color: colorFront),
+                        ),
+                      ),
+                    )
                   ],
                 );
               return Loading();

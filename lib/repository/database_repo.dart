@@ -7,12 +7,15 @@ import '../modules/class.dart';
 import 'package:http/http.dart' as http;
 
 class DatabaseRepository {
+  http.Client client = new http.Client();
   Future<http.Response> getData(
       {required String apiName, required String args}) async {
     String api = apiName;
     api = api + args;
-    return await http.get(Uri.parse('$server/$api'),
-        headers: {"Accept": "application/json"});
+    print(Uri.parse('$server$api'));
+    http.Response res = await client
+        .get(Uri.parse("$server$api"), headers: {"Accept": "application/json"});
+    return res;
   }
 
   Future<TheUser?> getUser(String id) async {
@@ -276,6 +279,35 @@ class DatabaseRepository {
       return null;
     }
     return zones;
+  }
+
+  Future<String?> addItem(String zoneId, String itemTypeId, List<String> data,
+      List<String> champs) async {
+    try {
+      final response = await getData(
+          apiName: "additem.php",
+          args: "?zoneId=$zoneId&itemTypeId=$itemTypeId");
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        print(data);
+        if (data["status"]) {
+          for (int i = 0; i < data.length; i++) {
+            await getData(
+                apiName: "addDataByChamp.php",
+                args:
+                    "?champId=${champs[i]}&data=${data[i]}&itemTypeId=$itemTypeId&itemId=${data["item"]}");
+          }
+          return ((data["item"]));
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   Future<Zone?> getZone(String id) async {
