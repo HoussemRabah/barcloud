@@ -1,4 +1,5 @@
 import 'package:barcloud/UI/screens/pages/home.dart';
+import 'package:barcloud/UI/screens/pages/homeChef.dart';
 import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:barcloud/repository/auth_repo.dart';
 import 'package:bloc/bloc.dart';
@@ -28,12 +29,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (event is AuthEventSignIn) {
         emit(AuthStateLoading());
+        print(event.email);
+        print(event.password);
         bool result = await authRepository.signIn(
             email: event.email, password: event.password);
         if (!result) {
           emit(AuthStateError(
               errorMessage: authRepository.errorMessage ?? "error 0"));
         } else {
+          print(authRepository.user!.role.name);
           switch (authRepository.user!.role.name) {
             case "agent":
               newScreen(context!, HomeAgent());
@@ -41,6 +45,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
             case "ing":
               newScreen(context!, HomeIng());
+              break;
+
+            case "chef":
+              newScreen(context!, HomeChef());
               break;
 
             case "admin":

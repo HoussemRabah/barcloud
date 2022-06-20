@@ -15,8 +15,11 @@ class ZoneBloc extends Bloc<ZoneEvent, ZoneState> {
     on<ZoneEvent>((event, emit) async {
       if (event is ZoneEventFetch) {
         emit(ZoneStateLoading());
-        zones =
-            await databaseRepository.getZones(authBloc.authRepository.user!.id);
+        if (authBloc.authRepository.user!.role.name == "agent")
+          zones = await databaseRepository
+              .getZones(authBloc.authRepository.user!.id);
+        else
+          zones = await databaseRepository.getAllZones();
 
         if (zones == null)
           emit(ZoneStateError());

@@ -78,6 +78,24 @@ class Zone {
   Zone({required this.id, required this.name});
 }
 
+class Event {
+  String eventId;
+  String? userId;
+  String? date;
+  String? checklistId;
+  String? taskId;
+  String? itemId;
+  String data;
+  Event(
+      {required this.eventId,
+      this.userId,
+      this.date,
+      this.checklistId,
+      this.taskId,
+      this.itemId,
+      required this.data});
+}
+
 class Categorie {
   String id;
   String name;

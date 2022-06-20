@@ -1,4 +1,5 @@
 import 'package:barcloud/UI/screens/pages/home.dart';
+import 'package:barcloud/UI/screens/pages/itemscreen.dart';
 import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:barcloud/repository/scanner_repo.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _ScannerViewState extends State<ScannerView> {
   Widget build(BuildContext context) {
     ScannerRepository scannerAPI = ScannerRepository();
     return Scaffold(body: scannerAPI.scannerCamera(onCapture: (result) {
-      newScreen(context, ResultView(result: result.text));
+      newScreen(context, ItemScreen(itemId: result));
     }));
   }
 }

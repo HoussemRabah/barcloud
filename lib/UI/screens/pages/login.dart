@@ -10,7 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../logic/bloc/categorie/categorie_bloc.dart';
 import '../../../logic/bloc/datachamp/datachamp_bloc.dart';
+import '../../../logic/bloc/event/event_bloc.dart';
 import '../../../logic/bloc/task/task_bloc.dart';
+import '../../../logic/bloc/user/user_bloc.dart';
 import '../../../repository/database_repo.dart';
 import '../../../repository/qr_repo.dart';
 
@@ -21,6 +23,8 @@ TaskBloc taskBloc = TaskBloc();
 ZoneBloc zoneBloc = ZoneBloc();
 CategorieBloc categorieBloc = CategorieBloc();
 DatachampBloc datachampBloc = DatachampBloc();
+EventBloc eventBloc = EventBloc();
+UserBloc userBloc = UserBloc();
 
 TextEditingController username =
     TextEditingController(text: "houssemranah@gmail.com");

@@ -18,6 +18,128 @@ class DatabaseRepository {
     return res;
   }
 
+  Future<bool> addTask(
+      String agentId,
+      String adminId,
+      String zoneId,
+      String title,
+      String disc,
+      String type,
+      String process,
+      String deadline) async {
+    final response = await getData(
+        apiName: "addTask.php",
+        args:
+            "?agentId=$agentId&zoneId=$zoneId&admineId=$adminId&title=$title&disc=$disc&type=$type&process=$process&deadline=$deadline");
+
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<List<Event>?> getEvents() async {
+    List<Event>? events = [];
+    final response = await getData(apiName: "getevents.php", args: "");
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          for (Map taskMap in data["events"])
+            events.add(fromMapEvent(taskMap["events"]));
+        } else {
+          return [];
+        }
+      } else {
+        print(response.body);
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+    return events;
+  }
+
+  Future<List<TheUser>?> getAllUsers() async {
+    List<TheUser>? users = [];
+    final response = await getData(apiName: "getAllUsers.php", args: "");
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          for (Map taskMap in data["users"])
+            users.add(TheUser.fromJson(taskMap as Map<String, dynamic>));
+        } else {
+          return [];
+        }
+      } else {
+        print(response.body);
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+    return users;
+  }
+
+  Future<List<Task>?> getAllTasks() async {
+    List<Task>? tasks = [];
+    final response = await getData(apiName: "getAllTasks.php", args: "");
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+        if (data["status"]) {
+          for (Map taskMap in data["tasks"]) tasks.add(fromMapTask(taskMap));
+        } else {
+          return [];
+        }
+      } else {
+        print(response.body);
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+    return tasks;
+  }
+
+  Future<List<Zone>?> getAllZones() async {
+    List<Zone>? zones = [];
+    final response = await getData(apiName: "getZones.php", args: "");
+
+    try {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+
+        if (data["status"]) {
+          for (Map zoneMap in data["zones"]) zones.add(fromMapZone(zoneMap));
+        } else {
+          return [];
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+    return zones;
+  }
+
   Future<TheUser?> getUser(String id) async {
     final response =
         await getData(apiName: "getUserById.php", args: "?userId=$id");
@@ -328,6 +450,16 @@ class DatabaseRepository {
     } catch (e) {
       return null;
     }
+  }
+
+  Event fromMapEvent(Map map) {
+    return Event(
+        eventId: map["eventId"],
+        itemId: map["itemId"],
+        checklistId: map["checklist"],
+        taskId: map["taskId"],
+        date: map["date"],
+        data: map["data"]);
   }
 
   DataChamp fromMapDataChamps(Map map) {

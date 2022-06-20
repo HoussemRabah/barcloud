@@ -21,8 +21,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       }
       if (event is TaskEventFetch) {
         emit(TaskStateLoading());
-        tasks =
-            await databaseRepository.getTasks(authBloc.authRepository.user!.id);
+        if (authBloc.authRepository.user!.role.name == "agent")
+          tasks = await databaseRepository
+              .getTasks(authBloc.authRepository.user!.id);
+        else
+          tasks = await databaseRepository.getAllTasks();
+
         tasksWaiting = getNumberTasksWaiting();
         tasksFinished = getNumberTasksFinished();
 

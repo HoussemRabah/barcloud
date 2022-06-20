@@ -1,6 +1,8 @@
 import 'package:barcloud/UI/screens/pages/addItem.dart';
+import 'package:barcloud/UI/screens/pages/itemscreen.dart';
 import 'package:barcloud/UI/screens/pages/login.dart';
 import 'package:barcloud/UI/screens/pages/tasks.dart';
+import 'package:barcloud/UI/screens/views/scannerView.dart';
 import 'package:barcloud/UI/widgets/cards/option.dart';
 import 'package:barcloud/UI/widgets/cards/task.dart';
 import 'package:barcloud/UI/widgets/headers/header.dart';
@@ -10,6 +12,7 @@ import 'package:barcloud/UI/screens/pages/Inv.dart';
 import 'package:barcloud/core/constants.dart';
 import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:barcloud/modules/class.dart';
+import 'package:barcloud/repository/scanner_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -115,7 +118,9 @@ class _HomeAgentState extends State<HomeAgent> {
                     OptionCard(
                         image: "assets/print.png",
                         title: "imprimer code",
-                        todo: () {}),
+                        todo: () {
+                          openScreen(context, ScannerView());
+                        }),
                     OptionCard(
                         image: "assets/additem.svg",
                         title: "ajouter un item",
