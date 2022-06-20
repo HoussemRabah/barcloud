@@ -1,4 +1,6 @@
+import 'package:barcloud/UI/screens/pages/addTask.dart';
 import 'package:barcloud/UI/screens/pages/login.dart';
+import 'package:barcloud/logic/functions/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +35,10 @@ class _TasksManagerScreenState extends State<TasksManagerScreen> {
             elevation: 0.0,
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            child: Icon(Icons.add, color: Colors.white),
+            onPressed: () {
+              openScreen(context, AddTaskScreen());
+            },
             backgroundColor: colorPrime,
           ),
           backgroundColor: colorBack,

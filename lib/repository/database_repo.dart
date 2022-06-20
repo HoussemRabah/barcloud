@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import '../UI/screens/pages/login.dart';
 import '../core/constants.dart';
 import '../modules/class.dart';
 import 'package:http/http.dart' as http;
@@ -18,24 +19,17 @@ class DatabaseRepository {
     return res;
   }
 
-  Future<bool> addTask(
-      String agentId,
-      String adminId,
-      String zoneId,
-      String title,
-      String disc,
-      String type,
-      String process,
-      String deadline) async {
+  Future<bool> addTask(String agentId, String adminId, String zoneId,
+      String title, String disc, String type, String deadline) async {
     final response = await getData(
         apiName: "addTask.php",
         args:
-            "?agentId=$agentId&zoneId=$zoneId&admineId=$adminId&title=$title&disc=$disc&type=$type&process=$process&deadline=$deadline");
-
+            "?agentId=$agentId&zoneId=$zoneId&adminId=$adminId&title=$title&disc=$disc&type=$type&deadline=$deadline");
     try {
       if (response.statusCode == 200) {
         Map data = jsonDecode(response.body);
         if (data["status"]) {
+          print(data["message"]);
           return true;
         } else {
           return false;

@@ -1,3 +1,4 @@
+import 'package:barcloud/UI/screens/pages/addTaskscreen.dart';
 import 'package:barcloud/UI/widgets/users/userlabel.dart';
 import 'package:barcloud/modules/class.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constants.dart';
 import '../../../logic/bloc/user/user_bloc.dart';
+import '../../../logic/functions/navigation.dart';
 import '../../widgets/loading/loading.dart';
 import 'login.dart';
 
@@ -38,14 +40,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     if (state is UserStateLoaded)
                       return Column(
                         children: [
-                          for (TheUser user in userBloc.users!)
+                          for (TheUser user in userBloc.users!
+                              .where((element) => element.role.name == "agent"))
                             GestureDetector(
                                 onTap: () {
-                                  /*  openScreen(
-                                      context,
-                                      ItemsScreen(
-                                        zone: zone,
-                                      ));*/
+                                  openScreen(context,
+                                      AddTaskDataScreen(agentId: user.id));
                                 },
                                 child: UserLabel(
                                     username: user.getFullName(),
